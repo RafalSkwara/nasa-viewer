@@ -1,0 +1,79 @@
+.page-wrapper
+	width: 100vw
+	height: 100vh
+	background: radial-gradient(#1A1C59 80%, #030305 100%)
+
+.hero
+	width: 100vw
+	display: flex
+	flex: 1 1
+	flex-direction: column
+	background: 
+		repeat: no-repeat
+		size: cover
+		position: center
+	&__logo
+		height: 100%
+		width: 250px
+		color: #fff
+
+.hero__content
+	display: flex
+	justify-content: center
+	align-items: flex-end
+	flex: 1 1
+	z-index: 100
+	height: calc(100vh - 100px)
+	width: 100%
+	.title-box
+		height: 80%
+		width: 100%
+		color: #7bc6ff
+		&--inner
+			background-color: rgba(0,0,0,0.4)
+			width: 100%
+			padding: 5vh 0
+		h1
+			font:
+				size: 7vmax
+				family: 'Notable', sans-serif	
+			margin-bottom: 5vh
+			text-shadow: 0 0 15px rgba(255,255,255,0.8)
+		h2
+			margin-bottom: 2vh
+			text-shadow: 0 0 5px rgba(255,255,255,0.8)
+		img
+			max-height: 18vh
+		a
+			transform-origin: center
+			transition: all .15s ease-in
+		a:hover
+			transform: scale(1.1)
+	.button-box
+		height: 20%
+	button
+		height: 50px
+		width: 250px
+		font-size: 18px
+		background-color: rgba(0,0,0,0.6)
+		border-radius: 20px
+		color: #ffffff
+		border: 3px solid #ffffff
+		transform-origin: center
+		&:hover
+			background-color: rgba(0,0,0,1)
+		&:active
+			transform: scale(0.98)
+	h1
+		
+
+.animated
+	background-color: #fff
+@keyframes mount
+	0%
+		width: 0%
+		opacity: 0
+	100%
+		width: 100%
+		opacity: 1
+

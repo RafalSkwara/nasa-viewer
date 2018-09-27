@@ -1,0 +1,116 @@
+@import "variables"
+@import url('https://fonts.googleapis.com/css?family=Exo:300,400,500,700')
+@import url('https://fonts.googleapis.com/css?family=Notable')
+html, .root
+  font-size: 16px
+  background-color: #000
+
+body
+  margin: 0
+  padding: 0
+
+*, button
+  font-family: 'Exo', Helvetica, Arial, Helvetica, sans-serif
+  margin: 0
+  padding: 0
+  box-sizing: border-box
+  
+button
+  border: none
+  outline: none
+  &:focus
+	  outline: none
+  &:hover
+	  cursor: pointer
+
+
+body
+  margin: 0 auto
+  background-color: $white
+
+.wrapper
+	width: 100%
+.wrapper, section
+	max-width: 100vw
+
+
+section
+	align-items: center
+
+.flex-center
+	display: flex
+	align-items: center
+	justify-content: center
+
+.flex-column-center
+	display: flex
+	flex-direction: column
+	justify-content: center
+	align-items: center
+
+.fullscreen-bg 
+	max-height: 100vh
+	position: fixed
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	overflow: hidden
+
+
+.btn
+	outline: none
+	border: none
+	&:hover
+		cursor: pointer
+.fade-appear 
+	transform: scale(.9)
+ 	opacity: 0.01
+.fade-appear.fade-appear-active
+	transform: scale(1)
+	opacity: 1
+	transition: all 500ms ease-out
+
+.fade-enter
+	opacity: 0
+.fade-enter.fade-enter-active
+	opacity: 1
+	transition: all 1s linear
+
+.fade-exit 
+  opacity: 1
+.fade-exit-active.fade-exit 
+  opacity: 0
+  transition: all 500ms ease-out
+.fade-exit-done
+	opacity: 0
+.switch-wrapper 
+  position: relative
+
+.switch-wrapper > div 
+  position: absolute
+
+.deshrink-appear 
+	transform: scale(.1)
+ 	opacity: 0
+
+.deshrink-appear.deshrink-appear-active
+	transform: scale(1)
+	opacity: 0.9
+	transition: all 300ms ease-out
+
+.deshrink-enter
+	opacity: 0
+
+.deshrink-enter.deshrink-enter-active
+	opacity: 0
+	transition: all 1s linear
+.deshrink-enter-done
+	opacity: 1
+.deshrink-exit 
+  opacity: 1
+.deshrink-exit-active.deshrink-exit 
+  opacity: 0
+  transition: all 300ms ease-out
+.deshrink-exit-done
+	opacity: 0
