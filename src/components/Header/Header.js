@@ -18,7 +18,7 @@ class Header extends React.Component {
 	render() {
 		return(
 		<header className="hero__header">
-			<div className="hero__logo flex-center">
+			<div className="hero__logo column-flex-center">
 				<NavLink to="/">
 					<h1>SkyDelve</h1>
 				</NavLink>
