@@ -13,6 +13,7 @@ import {
 	Redirect } from 'react-router-dom'
 
 import aPoaD from './components/aPoaD/aPoaD';
+import EPIC from './components/EPIC/EPIC';
 import HomePage from './views/HomePage';
 import StartPage from './views/StartPage';
 
@@ -36,6 +37,7 @@ class App extends React.Component {
 						atActive={{ opacity: 1 }}
       					className="switch-wrapper"
 					  >
+							<Route path={"/epic-earth"} exact component={EPIC}/>
 							<Route path={"/picture-of-the-day"} exact component={aPoaD}/>
 							<Route path={"/start"} exact component={StartPage}/>
 							<Route path={"/"} exact component={HomePage}/>

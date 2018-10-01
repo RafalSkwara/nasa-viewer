@@ -1,5 +1,5 @@
 export const keyReducer = (state = {
-	apiKey: "bcfe80d108c38d49f6ebc3fdf06942e0"
+	apiKey: "LqGe0BDDEOUijMSxA6encVpjHH9ETdmVNMb2tfuX"
 }, action) => {
 	switch (action.type) {
 		case 'CHANGE_KEY':

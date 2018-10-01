@@ -1,0 +1,36 @@
+@import '../../view_styles/variables.sass'
+.loading-spinner
+	height: 80px
+	width: 80px
+	border-top: 3px solid white
+	border-radius: 50%
+	animation: spin .3s linear infinite
+
+
+.image-wrapper
+	display: flex
+	height: 60vh
+	width: 100%
+	align-items: center
+	justify-content: center
+
+	img
+		border: 1px solid $medium-purple
+		box-shadow: 0 2px 5px 2px $medium-purple
+		flex: 0 1
+		height: 100%
+		max-width: 100%
+		object-fit: contain
+		transform-origin: center center
+		&:hover
+			cursor: pointer
+			transform: scale(1.01)
+			box-shadow: 0 2px 15px 5px $medium-purple
+
+
+@keyframes spin
+	0%
+		transform: rotate(0deg)
+	100%
+		transform: rotate(360deg)
+

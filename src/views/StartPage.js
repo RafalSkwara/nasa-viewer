@@ -36,22 +36,6 @@ class StartPage extends React.Component {
 
 	}
 
-	componentDidMount() {
-		// let self = this;
-		// axios.get(`https://api.nasa.gov/neo/rest/v1/feed?start_date=2018-09-07&end_date=2018-09-08&api_key=LqGe0BDDEOUijMSxA6encVpjHH9ETdmVNMb2tfuX`)
-		// 	.then(function (response) {
-		// 		// handle success
-		// 		console.log("Trial call received successfully")
-		// 		self.setState({
-		// 			visible: true
-		// 		})
-		// 	})
-		// 	.catch(function (error) {
-		// 		// handle error
-		// 		console.log(error);
-		// 	});
-	}
-
 	render() {
 		const data = internalData;
 		const imgSrc = require('../assets/img/bg2.jpg')

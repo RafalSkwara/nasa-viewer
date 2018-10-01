@@ -104,13 +104,41 @@ section
 
 .deshrink-enter.deshrink-enter-active
 	opacity: 0
-	transition: all 1s linear
+	transition: all 300ms linear
 .deshrink-enter-done
 	opacity: 1
 .deshrink-exit 
-  opacity: 1
+	opacity: 1
 .deshrink-exit-active.deshrink-exit 
-  opacity: 0
-  transition: all 300ms ease-out
+	opacity: 0
+	transition: all 300ms ease-out
 .deshrink-exit-done
+	opacity: 0
+
+
+
+.photo-show-appear 
+	transform: scale(.1)
+ 	opacity: 0
+
+.photo-show-appear.photo-show-appear-active
+	transform: scale(1)
+	opacity: 1
+	// transition: all 300ms ease-out
+
+.photo-show-enter
+	opacity: 0
+
+.photo-show-enter.photo-show-enter-active
+	opacity: 0
+	transition: all 300ms linear
+.photo-show-enter-done
+	opacity: 1
+.photo-show-exit
+	transition: all 300ms linear 
+	opacity: 1
+.photo-show-exit-active.photo-show-exit 
+	opacity: 0
+	transition: all 300ms ease-out
+.photo-show-exit-done
 	opacity: 0

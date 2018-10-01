@@ -1,4 +1,4 @@
-.poad
+.epic
 	.hero__content
 		display: flex
 		align-items: center
@@ -22,7 +22,7 @@
 		h2
 			margin: 0 40px 40px 40px
 			font-weight: 400
-.poad__results-wrap
+.epic__results-wrap
 	display: flex
 	height: 100%
 	width: 100%
@@ -33,7 +33,34 @@
 	.column-left
 		align-items: center
 		width: 30%
+		min-width: 360px
 		.rc-calendar
 			margin-bottom: 5vh
 	.column-right
 		width: 70%
+@media all and(max-width: 1000px)
+	.epic .hero__content h2
+		margin: 0 15px 5px 15px
+	.hero.fullscreen-bg.epic
+		max-height: auto
+		overflow-y: scroll
+	.epic__results-wrap
+		flex-direction: column-reverse
+		justify-content: flex-end
+		height: 100%
+		width: 100%
+		padding-top: 20px
+		.column
+			display: flex
+			width: 100%
+			height: auto
+			padding: 20px
+			&.shrunk
+				height: 40px
+		.column-left
+			align-items: center
+			min-width: 100%
+			margin-botom: 20px
+			.rc-calendar
+				margin-bottom: 5vh
+		.column-right
