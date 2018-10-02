@@ -90,7 +90,7 @@
     color: #666
 
 .rc-calendar-picker
-  position: absolute
+  position: relative
   left: -9999px
   top: -9999px
   z-index: 1000
@@ -342,16 +342,16 @@
     cursor: pointer
 
 .rc-calendar-selected-day .rc-calendar-date
-  background: #d9f4fe
+  background: $lightest-purple
 
 .rc-calendar-selected-date .rc-calendar-date
-  background: #3fc7fa
-  color: #fff
+  background: $lightest-purple
+  color: $dark-purple
   &:hover
-    background: #3fc7fa
+    background: $lightest-purple
 
 .rc-calendar-today .rc-calendar-date
-  border: 1px solid #3fc7fa
+  border: 1px solid $lightest-purple
 
 .rc-calendar-disabled-cell .rc-calendar-date
   cursor: not-allowed
@@ -413,7 +413,7 @@
 
 .rc-calendar-today-btn:hover, .rc-calendar-ok-btn:hover, .rc-calendar-time-picker-btn:hover
   cursor: pointer
-  color: #23c0fa
+  color: $lightest-purple
 
 .rc-calendar-today-btn-disabled, .rc-calendar-ok-btn-disabled, .rc-calendar-time-picker-btn-disabled, .rc-calendar-today-btn-disabled:hover, .rc-calendar-ok-btn-disabled:hover, .rc-calendar-time-picker-btn-disabled:hover
   color: #bbb
@@ -435,10 +435,10 @@
   transform: border 0.3s cubic-bezier(0.35, 0, 0.25, 1), background 0.3s cubic-bezier(0.35, 0, 0.25, 1), box-shadow 0.3s cubic-bezier(0.35, 0, 0.25, 1)
   width: 40px
   &:hover
-    border-color: #23c0fa
+    border-color: $lightest-purple
   &:focus
-    border-color: #23c0fa
-    box-shadow: 0 0 3px #23c0fa
+    border-color: $lightest-purple
+    box-shadow: 0 0 3px $lightest-purple
 
 .rc-calendar-time-panel
   left: 0
@@ -497,10 +497,10 @@
     cursor: pointer
 
 .rc-calendar-time-panel-selected-cell .rc-calendar-time-panel-time
-  background: #3fc7fa
+  background: $lightest-purple
   color: #fff
   &:hover
-    background: #3fc7fa
+    background: $lightest-purple
     color: #fff
 
 .rc-calendar-month-panel
@@ -535,7 +535,7 @@
     width: 30px
     &:hover
       cursor: pointer
-      color: #23c0fa
+      color: $lightest-purple
 
 .rc-calendar-month-panel-prev-year-btn
   position: absolute
@@ -652,7 +652,7 @@
     width: 30px
     &:hover
       cursor: pointer
-      color: #23c0fa
+      color: $lightest-purple
 
 .rc-calendar-year-panel-prev-decade-btn
   position: absolute
@@ -705,7 +705,7 @@
   display: block
   width: 46px
   margin: 0 auto
-  color: #666
+  color: $lightest-purple
   border-radius: 4px 4px
   height: 36px
   padding: 0
@@ -717,10 +717,10 @@
     cursor: pointer
 
 .rc-calendar-year-panel-selected-cell .rc-calendar-year-panel-year
-  background: #3fc7fa
+  background: $lightest-purple
   color: #fff
   &:hover
-    background: #3fc7fa
+    background: $lightest-purple
     color: #fff
 
 .rc-calendar-year-panel-last-decade-cell .rc-calendar-year-panel-year, .rc-calendar-year-panel-next-decade-cell .rc-calendar-year-panel-year
@@ -735,7 +735,7 @@
   top: 0
   bottom: 0
   right: 0
-  background: #ffffff
+  background: $medium-purple
   z-index: 10
   position: absolute
   outline: none
@@ -762,7 +762,7 @@
     width: 30px
     &:hover
       cursor: pointer
-      color: #23c0fa
+      color: $lightest-purple
 
 .rc-calendar-decade-panel-prev-century-btn
   position: absolute
@@ -808,7 +808,7 @@
 .rc-calendar-decade-panel-decade
   display: block
   margin: 0 auto
-  color: #666
+  color: $lightest-purple
   border-radius: 4px 4px
   height: 36px
   padding: 0
@@ -820,10 +820,10 @@
     cursor: pointer
 
 .rc-calendar-decade-panel-selected-cell .rc-calendar-decade-panel-decade
-  background: #3fc7fa
+  background: $lightest-purple
   color: #fff
   &:hover
-    background: #3fc7fa
+    background: $lightest-purple
     color: #fff
 
 .rc-calendar-decade-panel-last-century-cell .rc-calendar-decade-panel-decade, .rc-calendar-decade-panel-next-century-cell .rc-calendar-decade-panel-decade
@@ -935,13 +935,13 @@
   display: inline-block
 
 .rc-calendar-full-header-switcher-normal:hover
-  border-color: #23c0fa
+  border-color: $lightest-purple
   box-shadow: 0 0 2px rgba(45, 183, 245, 0.8)
   cursor: pointer
 
 .rc-calendar-full-header-switcher-focus
-  border-color: #3fc7fa
-  background-color: #3fc7fa
+  border-color: $lightest-purple
+  background-color: $lightest-purple
   color: #fff
 
 .rc-calendar-full-header-switcher > span
@@ -993,5 +993,9 @@
     background-color: #ebfaff
     color: #666
   .rc-calendar-today .rc-calendar-date, .rc-calendar-month-panel-selected-cell .rc-calendar-month-panel-month
-    border-top-color: #3FC7FA
-    color: #3FC7FA
+    border-top-color: $lightest-purple
+    color: $lightest-purple
+
+@media all and (max-width: 1000px)
+	.rc-calendar-time-picker
+  		height: 227px

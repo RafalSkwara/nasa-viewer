@@ -19,6 +19,11 @@ export const EPICReducer = (state = {
 				...state,
 				variant: state.variant-1
 			}
+		case 'EPIC_SET_VARIANT':
+			return {
+				...state,
+				variant: action.payload
+			}
 		default:
 			return state;
 	}

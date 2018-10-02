@@ -22,7 +22,8 @@ class BigPicture extends React.Component {
 			loading: false,
 			height: 0,
 			width: 0,
-			error: ''
+			error: '',
+			loading: true
 		}
 		this.toggleBigImage = this.toggleBigImage.bind(this)
 	}
@@ -57,6 +58,7 @@ class BigPicture extends React.Component {
 				className="big-picture"
 				key={this.state.picture}
 				>
+				{this.state.loading && <div className="loading-spinner"></div>}
 				<img src={this.props.url}
 					style={styles}
 					onLoad={() => this.setState({ opacity: 1, loading: false, height: '100%', width: 'auto' })}

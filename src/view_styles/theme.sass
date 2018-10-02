@@ -18,6 +18,8 @@ body
 button
   border: none
   outline: none
+  flex-shrink: 0
+  height: 50px
   &:focus
 	  outline: none
   &:hover
@@ -31,6 +33,7 @@ body
 
 .page-wrapper
 	width: 100vw
+	max-width: 100%
 
 
 
@@ -50,12 +53,10 @@ section
 
 .fullscreen-bg 
 	max-height: 100vh
-	position: fixed
 	top: 0
 	right: 0
 	bottom: 0
 	left: 0
-	overflow: hidden
 
 
 .btn

@@ -1,7 +1,9 @@
+@import '../../view_styles/variables.sass'
 .hero
 	&__header
 		display: flex
 		align-items: center
+		justify-content: space-between
 		width: 100%
 		height: 10%
 		min-height: 100px
@@ -10,9 +12,11 @@
 		background-color: rgba(0,0,0,0.5)
 	&__logo
 		height: 100%
+		display: flex
+		align-items: center
 		a
 			text-decoration: none
-			color: #7bc6ff
+			color: white
 		h1
 			font-family: 'Notable', Arial
 			font-size: 32px
@@ -20,7 +24,16 @@
 			transition: all .15s ease-in-out
 			&:hover
 				text-shadow: none
-				color: #fff
+				color: $lightest-purple
+	.go-back-link
+		color: #ffffff
+		text-decoration: none
+		text-transform: uppercase
+		letter-spacing: 1.5px
+		font-size: 20px
+		height: 100%
+		&:hover
+			color: $lightest-purple
 	
 @media all and (max-width: 720px)
 	.hero
@@ -33,11 +46,15 @@
 		&__header
 			padding: 0 10px
 			min-height: 60px
-			max-height: 80px
+			height: 60px
+			position: fixed
+			max-width: calc(100% - 20px)
+			z-index: 1000
+		&__content
+			padding-top: 80px
 		&__logo
 			width: 140px
 			a
 				text-decoration: none
-				color: #7bc6ff
 			h1
 				font-size: 20px

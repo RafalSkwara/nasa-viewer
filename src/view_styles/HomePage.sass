@@ -1,3 +1,4 @@
+@import './variables.sass'
 .page-wrapper
 	width: 100vw
 	height: 100vh
@@ -16,19 +17,22 @@
 		height: 100%
 		width: 250px
 		color: #fff
-
+.fullscreen-bg
+	height: 100vh
+	max-height: 100%
+	max-width: 100%
 .hero__content
 	display: flex
 	justify-content: center
 	align-items: flex-end
-	flex: 1 1
-	z-index: 100
+	flex: 1 0
+
 	height: calc(100vh - 100px)
 	width: 100%
 	.title-box
 		height: 80%
 		width: 100%
-		color: #7bc6ff
+		color: $white
 		&--inner
 			background-color: rgba(0,0,0,0.4)
 			width: 100%
@@ -41,7 +45,7 @@
 			text-shadow: 0 0 15px rgba(255,255,255,0.8)
 		h2
 			margin-bottom: 2vh
-			text-shadow: 0 0 5px rgba(255,255,255,0.8)
+			text-shadow: 0 0 3px rgba(255,255,255,0.8)
 		img
 			max-height: 18vh
 		a
@@ -60,8 +64,13 @@
 		color: #ffffff
 		border: 3px solid #ffffff
 		transform-origin: center
+		transition: all .12s ease-in
 		&:hover
-			background-color: rgba(0,0,0,1)
+			background-color: $dark-purple
+			border: 3px solid $lightest-purple
+			color: $lightest-purple
+			font-weight: 500
+			text-shadow: 0 0 3px white
 		&:active
 			transform: scale(0.98)
 	h1

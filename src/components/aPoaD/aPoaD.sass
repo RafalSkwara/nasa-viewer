@@ -37,3 +37,50 @@
 			margin-bottom: 5vh
 	.column-right
 		width: 70%
+@media all and(max-width: 1000px)
+	html, body
+		overflow: auto
+	.poad .hero__content
+		height: auto
+		display: block	
+	.poad .hero__content h1
+		font-size: 24px
+		margin: 0
+		text-align: center
+		padding: 8px 0
+	.poad .hero__content h2
+		margin: 0 15px 5px 15px
+		font-size: 18px
+	.hero.fullscreen-bg.poad
+		max-height: auto
+		overflow-y: auto
+		overflow-x: hidden
+		max-width: 100%
+	.poad__results-wrap
+		display: block
+		flex: 1 1 0
+		flex-direction: column-reverse
+		justify-content: flex-end
+		height: auto
+		min-height: auto
+		width: 100%
+		padding-top: 20px
+		.column
+			display: flex
+			width: 100%
+			height: auto
+			padding: 0
+			&.shrunk
+				height: 80px
+			.image-wrapper img:hover
+				transfrom: scale(1)
+		.column-left
+			align-items: center
+			min-width: 100%
+			margin-bottom: 20px
+			.rc-calendar
+				margin-bottom: 5vh
+		.column-right
+	.poad
+		.rc-calendar.calendar
+			margin-bottom: 10px

@@ -9,6 +9,7 @@ import Header from "../Header/Header";
 import './rc-calendar.sass';
 import Calendar from 'rc-calendar';
 import Picture from '../Picture/Picture';
+
 import {
 	BrowserRouter as Router,
 	Route,
@@ -27,23 +28,13 @@ class aPoaD extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			transition: this.props.num * 100 + 'ms',
 			value: '',
 			request_base: 'https://api.nasa.gov/planetary/apod?api_key=',
-			request: '',
 			picture: ''
 
 		}
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSearch = this.handleSearch.bind(this)
-	}
-
-	componentDidMount() {
-		setTimeout(() => {
-			this.setState({
-				transition: ''
-			})
-		}, 1000);
 	}
 
 	buildUrl() {
@@ -52,6 +43,7 @@ class aPoaD extends React.Component {
 	}
 
 	handleChange(val) {
+		//update the state with selected date
 		let dat = val._d;
 		const year = val._d.getFullYear();
 		const month = val._d.getMonth() + 1;
@@ -63,14 +55,13 @@ class aPoaD extends React.Component {
 	}
 
 	handleSearch() {
-		let url = this.buildUrl();
-		console.log('search fired');
-		
+		//method that fetches the data and distributes it in the state
+		let url = this.buildUrl();		
 		axios.get(url)
 			.then(res => {
-				console.log(res.data)
 				this.setState({
 					picture: res.data.url ? res.data.url : res.data.hdurl,
+					pictureHD: res.data.hdurl,
 					mediaType: res.data.media_type,
 					text: res.data.explanation
 				})
@@ -81,7 +72,7 @@ class aPoaD extends React.Component {
 		const imgSrc = require('../../assets/img/bg2.jpg');
 		return(
 			<section className="hero fullscreen-bg poad" style={{ backgroundImage: `url(${imgSrc})` }}>
-				<Header />
+				<Header goBack/>
 				<div className="hero__content flex-column-center">
 					<h1>A Picture of the Day</h1>
 					<h2>Welcome to A Picture of the Day image viewer. Here you can browse through thousands of images
@@ -115,7 +106,11 @@ class aPoaD extends React.Component {
 								timeout={600}
 								classNames="deshrink"
 								unmountOnExit>
-								<Picture url={this.state.picture} mediaType={this.state.mediaType} />
+								<Picture 
+									url={this.state.picture} 
+									HDurl={this.state.pictureHD} 
+									mediaType={this.state.mediaType} 
+									text={this.state.text}/>
 							</CSSTransition>
 						</div>
 					</div>

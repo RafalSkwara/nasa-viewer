@@ -10,6 +10,7 @@ import {
 	Redirect
 } from 'react-router-dom'
 import BigPicture from "../BigPicture/BigPicture";
+import PoadDetails from '../PoadDetails/PoadDetails';
 import "./Picture.sass";
 
 
@@ -24,8 +25,10 @@ class Picture extends React.Component {
 			height: 0,
 			width: 0,
 			error: '',
-			big: false
+			big: false,
+			showDetails: false
 		}
+		this.toggleShowDetails = this.toggleShowDetails.bind(this)
 		this.toggleBigImage = this.toggleBigImage.bind(this)
 		this.closeBigImage = this.closeBigImage.bind(this);
 	}
@@ -72,9 +75,13 @@ class Picture extends React.Component {
 	}
 
 	toggleBigImage() {
-		
 		this.setState({
 			big: !this.state.big
+		})
+	}
+	toggleShowDetails() {
+		this.setState({
+			showDetails: !this.state.showDetails
 		})
 	}
 
@@ -96,27 +103,32 @@ class Picture extends React.Component {
 				classNames="deshrink"
 				unmountOnExit>
 				<React.Fragment>
+				{this.props.text && <button className="details" onClick={this.toggleShowDetails} >Details</button>}
 				<div className="image-wrapper">
 				{this.state.loading && <div className="loading-spinner"></div>}
 				{ this.props.url ? 
 					this.props.mediaType === 'video' ?
 							<iframe id="ytplayer" type="text/html" width={this.state.width} height={this.state.height}
 							src={this.props.url}
-							frameborder="0" 
+							frameBorder="0" 
 							onLoad={() => this.setState({ opacity: 1, loading: false, height: '100%', width: '100%' })}/>
 							:
-					
+				
 						<img src={this.props.url} 
 							style={styles}
 							onLoad={() => this.setState({ opacity: 1, loading: false, height: '100%', width: 'auto' })}
 							onClick={this.toggleBigImage}	
-						/> 
+						/>
+				
 					
 					: 
 					<p>Choose a date and click the 'Search' button to see an image here.</p>
 				}
 				</div>
-		
+					{this.state.showDetails && <PoadDetails
+						clickHandler={this.toggleShowDetails}
+						text={this.props.text}
+					/>}
 				<CSSTransition
 					// in={this.state.visible}
 					key={this.state.picture}
@@ -127,7 +139,7 @@ class Picture extends React.Component {
 					classNames="photo-show"
 					unmountOnExit
 					>
-						<BigPicture onClick={this.toggleBigImage} url={this.props.url}/>
+						<BigPicture onClick={this.toggleBigImage} url={this.props.HDurl ? this.props.HDurl : this.props.url}/>
 
 					</CSSTransition>
 				

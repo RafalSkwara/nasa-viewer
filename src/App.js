@@ -27,7 +27,7 @@ class App extends React.Component {
 		
 		const timeout = 1000;
 		return (
-			<Router basename={"/"} > 
+			<Router basename={"/skydelve"} > 
 			{/* change the string in basename to "/" for development */}
 				<div className={"page-wrapper"}>
 					<AnimatedSwitch
