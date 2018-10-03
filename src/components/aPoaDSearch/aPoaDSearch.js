@@ -5,11 +5,11 @@ import axios from 'axios';
 import { withRouter, NavLink } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AnimatedSwitch } from 'react-router-transition';
-import { BulkUpdateImage, bulkUpdateImage, clearImageData} from '../../actions/APoaDActions';
+import {BulkUpdateImage, bulkUpdateImage} from '../../actions/APoaDActions';
 import Header from "../Header/Header";
-import APoaDSearch from "../APoaDSearch/APoaDSearch";
+import '../../view_styles/rc-calendar.sass';
 import Calendar from 'rc-calendar';
-import PoadPicture from '../PoadPicture/PoadPicture';
+
 
 import {
 	Route,
@@ -17,7 +17,7 @@ import {
 	Switch,
 	Redirect
 } from 'react-router-dom'
-import "./aPoaD.sass";
+import "./aPoaDSearch.sass";
 
 const mapStateToProps = state => ({
 	apiKey: state.keyReducer.apiKey,
@@ -28,16 +28,15 @@ const mapStateToProps = state => ({
 });
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		updateImage: bulkUpdateImage,
-		clearImageData: clearImageData
+		updateImage: bulkUpdateImage
 	}, dispatch);
 }
-class aPoaD extends React.Component {
+class aPoaDSearch extends React.Component {
 	// eslint-disable-line react/prefer-stateless-function
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: '2018-10-01',
+			value: '',
 			request_base: 'https://api.nasa.gov/planetary/apod?api_key=',
 			picture: ''
 
@@ -45,11 +44,6 @@ class aPoaD extends React.Component {
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSearch = this.handleSearch.bind(this)
 	}
-
-	componentDidMount() {
-		this.props.clearImageData();
-	}
-	
 
 	buildUrl() {
 		let url = this.state.request_base + this.props.apiKey;
@@ -69,6 +63,7 @@ class aPoaD extends React.Component {
 	}
 
 	handleSearch() {
+		this.props.updateImage("");
 		//method that fetches the data and distributes it in the state
 		let url = this.buildUrl();		
 		axios.get(url)
@@ -79,33 +74,44 @@ class aPoaD extends React.Component {
 					mediaType: res.data.media_type,
 					details: res.data.explanation
 				})
-				console.log({
-					imgUrl: res.data.url ? res.data.url : res.data.hdurl,
-					imgHDUrl: res.data.hdurl,
-					mediaType: res.data.media_type,
-					details: res.data.explanation
-				})
 			})
 	}
 
 	render() {
 		const imgSrc = require('../../assets/img/bg2.jpg');
-		return(
-			<AnimatedSwitch
-
-				atEnter={{ opacity: 0 }}
-				atLeave={{ opacity: 0 }}
-				atActive={{ opacity: 1 }}
-				className="switch-wrapper"
-			>
-				
-				<Route path={`${this.props.match.path}`} exact component={APoaDSearch}/>
-				<Route path={`${this.props.match.path}/picture`} component={PoadPicture}/>
-				/>
-			</AnimatedSwitch>
+		return (
+			<section className="hero fullscreen-bg poad-search" style={{ backgroundImage: `url(${imgSrc})` }}>
+			<Header goBack to={"/start"} />
+			<div className="hero__content">
+				<h1>A Picture of the Day</h1>
+				<p>Welcome to Astronomy Picture of the Day image viewer. Here you can see thousands of amazing images chosen by NASA that come with detailed explanations.</p>
+				<p>Just pick a date and click the Search button to begin your journey thorugh space and time. Have fun!</p>
+				<div className="poad__calendar-wrap">
+					<Calendar 
+						className="calendar"
+						onChange={ (value) => this.handleChange(value) } 
+						showDateInput={false}
+						showToday={false}
+					>
+						{
+							({ value }) => {
+								return (<input type="text" name="startDate" value={value} />);
+							}
+						}
+					</Calendar>
+					<NavLink 
+						to={`${this.props.match.path}/picture`} 
+						onClick={this.handleSearch}
+						className="search-button btn"
+					>
+						Search
+					</NavLink>
+				</div>
+			</div>
+			</section>
 		)
 	}
 
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(aPoaD))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(aPoaDSearch))

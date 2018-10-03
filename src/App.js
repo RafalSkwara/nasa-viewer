@@ -37,10 +37,10 @@ class App extends React.Component {
 						atActive={{ opacity: 1 }}
       					className="switch-wrapper"
 					  >
-							<Route path={"/epic-earth"} exact component={EPIC}/>
-							<Route path={"/picture-of-the-day"} exact component={aPoaD}/>
-							<Route path={"/start"} exact component={StartPage}/>
 							<Route path={"/"} exact component={HomePage}/>
+							<Route path={"/epic-earth"} component={EPIC}/>
+							<Route path={"/picture-of-the-day"} component={aPoaD}/>
+							<Route path={"/start"} component={StartPage}/>
 							<Redirect from={"*"} to={"/"} />
 						</AnimatedSwitch>
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AnimatedSwitch } from 'react-router-transition';
@@ -11,7 +12,9 @@ import {
 } from 'react-router-dom'
 import "./PoadDetails.sass";
 
-
+const mapStateToProps = state => ({
+	details: state.APOADReducer.details
+});
 class PoadDetails extends React.Component {
 	// eslint-disable-line react/prefer-stateless-function
 	constructor(props) {
@@ -41,11 +44,11 @@ class PoadDetails extends React.Component {
 
 			<div
 				className="poad-details"
-				key={this.props.text.slice(0, 10)}
+				key={this.props.details.slice(0, 10)}
 				onClick={this.props.clickHandler}
 			>
 				<h3 className="heading">Picture Details</h3>
-				<p>{this.props.text}</p>
+				<p>{this.props.details}</p>
 				<p className="small">Click, tap or press <em>Escape</em> to exit</p>
 			</div>
 		)
@@ -54,4 +57,4 @@ class PoadDetails extends React.Component {
 
 }
 
-export default PoadDetails
+export default withRouter(connect(mapStateToProps)(PoadDetails))

@@ -25,7 +25,7 @@ class Header extends React.Component {
 					<h1>SkyDelve</h1>
 				</NavLink>
 			</div>
-				{this.props.goBack && <NavLink to="/start" className="go-back-link flex-center">
+				{this.props.goBack && <NavLink to={this.props.to} className="go-back-link flex-center">
 					<Icon icon={ic_arrow_back} size={34} />
 				</NavLink>}
 		</header>

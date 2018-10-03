@@ -40,6 +40,10 @@ body
 section
 	align-items: center
 
+a
+	text-decoration: none
+	color: inherit
+
 .flex-center
 	display: flex
 	align-items: center
@@ -62,8 +66,20 @@ section
 .btn
 	outline: none
 	border: none
+	display: block
+	padding: 12px 24px
+	font-size: 20px
+	border-radius: 10px
+	background-color: rgba(0,0,0,0.6)
+	border: 2px solid #fff
+	transition: all .12s ease-in-out
 	&:hover
 		cursor: pointer
+		background-color: $medium-purple
+		// color: $lightest-purple
+		border: 2px solid $dark-purple
+
+
 .fade-appear 
 	transform: scale(.9)
  	opacity: 0.01
@@ -116,6 +132,10 @@ section
 .deshrink-exit-done
 	opacity: 0
 
+.photo-show
+	&-appear,
+	&-exit
+		transform-origin: center
 
 
 .photo-show-appear 
@@ -143,3 +163,17 @@ section
 	transition: all 300ms ease-out
 .photo-show-exit-done
 	opacity: 0
+
+.loading-spinner
+	height: 80px
+	width: 80px
+	border-top: 3px solid #ffffff
+	border-radius: 50%
+	animation: spin 500ms linear infinite
+
+
+@keyframes spin
+	0%
+		transform: rotate(0deg)
+	100%
+		transform: rotate(360deg)

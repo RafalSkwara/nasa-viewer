@@ -1,8 +1,12 @@
 @import '../../view_styles/variables.sass'
+$header-height: 100px
 .poad-details
 	width: 100%
 	max-width: 100%
-	height: calc(100% - 100px)
+	min-height: calc(100vh - 100px)
+	height: auto
+	overflow: initial
+	overflow-x: hidden
 	position: absolute
 	top: 100px
 	left: 0
@@ -27,10 +31,15 @@
 		background-color: $light-purple
 		
 @media all and(max-width: 1000px)
+	$header-height: 80px
 	.poad-details
-		width: 100%
-		max-width: 100%
-		height: auto
-		top: 60px
 		p
 			font-size: 16px
+@media all and (max-width: 720px)
+	.poad-details
+		height: calc(100vh - 80px)
+		top: 80px
+@media all and (max-width: 640px)
+	.poad-details
+		height: calc(100vh - 60px)
+		top: 60px

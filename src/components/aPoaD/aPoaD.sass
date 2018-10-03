@@ -3,84 +3,20 @@
 		display: flex
 		align-items: center
 		flex-direction: column
-		justify-content: space-around
+		justify-content: flex-start
 		background-color: rgba(0,0,0,0.6)
-		max-width: 1440px
-		color: #fff
-		div.switch-wrapper > div,
-		div.switch-wrapper 
-			height: 100%
-			width: 100%
-			display: flex
-			flex-direction: column
-			align-items: center
-			justify-content: flex-start
-		h1
-			font-size: 32px
-
-			padding: 20px
-		h2
-			margin: 0 40px 40px 40px
-			font-weight: 400
-.poad__results-wrap
-	display: flex
-	height: 100%
-	width: 100%
-	padding-top: 20px
-	.column
-		display: flex
-		flex-direction: column
-	.column-left
-		align-items: center
-		width: 30%
-		.rc-calendar
-			margin-bottom: 5vh
-	.column-right
-		width: 70%
-@media all and(max-width: 1000px)
-	html, body
-		overflow: auto
-	.poad .hero__content
-		height: auto
-		display: block	
-	.poad .hero__content h1
-		font-size: 24px
-		margin: 0
-		text-align: center
-		padding: 8px 0
-	.poad .hero__content h2
-		margin: 0 15px 5px 15px
-		font-size: 18px
-	.hero.fullscreen-bg.poad
-		max-height: auto
-		overflow-y: auto
-		overflow-x: hidden
 		max-width: 100%
-	.poad__results-wrap
-		display: block
-		flex: 1 1 0
-		flex-direction: column-reverse
-		justify-content: flex-end
-		height: auto
-		min-height: auto
+		color: #fff
+		img
+			max-height: calc(100vh - 200px)
+			object-fit: contain
+	&__results-wrap
 		width: 100%
-		padding-top: 20px
-		.column
-			display: flex
-			width: 100%
-			height: auto
-			padding: 0
-			&.shrunk
-				height: 80px
-			.image-wrapper img:hover
-				transfrom: scale(1)
-		.column-left
-			align-items: center
-			min-width: 100%
-			margin-bottom: 20px
-			.rc-calendar
-				margin-bottom: 5vh
-		.column-right
+		height: 100%
+		display: flex
+		align-items: center
+		justify-content: center
+
+@media all and (max-width: 720px)
 	.poad
-		.rc-calendar.calendar
-			margin-bottom: 10px
+		.hero__content
