@@ -1,7 +1,8 @@
 .poad
 	img
 		max-width: 100%
-		max-height: calc(100vh - 220px)
+		max-height: calc(100vh - 250px)
+		
 		object-fit: contain
 		transform-origin: center center
 	&__info
@@ -23,3 +24,8 @@
 		img
 			flex: 1 1
 			transform-origin: center
+
+@media all and (max-width: 720px)
+	.poad
+		img
+			max-height: calc(100vh - 220px)

@@ -1,4 +1,8 @@
 .epic
+
+	img
+		max-height: calc(100vh - 270px)
+		max-width: 100vw
 	.hero__content
 		display: flex
 		align-items: center
@@ -72,31 +76,10 @@
 	.hero.fullscreen-bg.epic
 		max-height: auto
 		overflow: auto
-	.epic__results-wrap
-		display: block
-		flex: 1 1 0
-		flex-direction: column-reverse
-		justify-content: flex-end
-		height: auto
-		min-height: auto
-		width: 100%
-		padding-top: 20px
-		.column
-			display: flex
-			width: 100%
-			height: auto
-			padding: 0
-			&.shrunk
-				height: 80px
-			.image-wrapper img:hover
-				transfrom: scale(1)
-		.column-left
-			align-items: center
-			min-width: 100%
-			margin-botom: 20px
-			.rc-calendar
-				margin-bottom: 5vh
-		.column-right
+@media all and (max-width: 720px)
 	.epic
-		.rc-calendar.calendar
-			margin-bottom: 10px
+		img
+			max-height: calc(100vh - 220px)
+	.epic
+		.hero__content
+			padding: 70px 10px 0 10px
