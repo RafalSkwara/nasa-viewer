@@ -44,7 +44,7 @@ class PoadPicture extends React.Component {
 
 
 		if(this.props.imgUrl) {
-			this.setState({loading: true})
+			this.setState({loading: true, showDetails: false})
 		}
 
 		document.body.addEventListener('keypress', this.closeBigImage)
@@ -90,7 +90,8 @@ class PoadPicture extends React.Component {
 	}
 
 	render() {
-		const theKey = this.props.picture || this.props.imgUrl
+		const theKey = this.props.picture || this.props.imgUrl;
+		let width = screen.width;
 		const styles= { 
 			opacity: this.state.opacity,
 			transition: 'all .3s ease-in',
@@ -99,20 +100,36 @@ class PoadPicture extends React.Component {
 		}
 		const imgSrc = require('../../assets/img/bg2.jpg');
 		return (
-			<section className="hero fullscreen-bg poad" style={{ backgroundImage: `url(${imgSrc})` }}>
+			<div className="container-fluid p-0 poad poad-picture" style={{
+				backgroundImage: `url(${imgSrc})`,
+				height: "100vh",
+				width: "100vw"
+			}}>
 				<Header goBack to={"/picture-of-the-day"} />
-				<div className="hero__content flex-column-center">
-					{this.state.showDetails && <PoadDetails clickHandler={this.toggleShowDetails}/>}
-					<h1>A Picture of the Day</h1>
-
-						<div className="poad__info">
-						{this.props.details && <button className="details" onClick={this.toggleShowDetails} >Details</button>}
-						</div>
-						<div className="image-wrapper">
-						{this.state.loading && <div className="loading-spinner"></div>}
+				<div className="row no-gutters">
+					<div className="col-12">
+						<h1 className="main-heading">A Picture of the Day</h1>
+					</div>
+				</div>
+				<div className="row no-gutters">
+					<div className="col-12 justify-content-center">
+						<CSSTransition 
+							in={this.state.showDetails}
+							classNames="deshrink"
+							unmountOnExit={true}
+							timeout={300}
+							>
+							<PoadDetails clickHandler={this.toggleShowDetails}/>
+						</CSSTransition>
+					</div>
+				</div>
+				<div className="row no-gutters">
+					<div className="col-12 justify-content-center">
+						<div className="image-wrapper justify-content-center">
+						{this.state.loading && <div className="spinner-wrapper"><div className="loading-spinner"></div></div>}
 						{ this.props.imgUrl ? 
 							this.props.mediaType === 'video' ?
-									<iframe id="ytplayer" type="text/html" width={this.state.width} height={this.state.height}
+									<iframe id="ytplayer" type="text/html" width={this.state.width} height={width/2}
 									src={this.props.imgUrl}
 									frameBorder="0" 
 									onLoad={() => this.setState({ opacity: 1, loading: false, height: '100%', width: '100%' })}/>
@@ -128,10 +145,18 @@ class PoadPicture extends React.Component {
 							: 
 							null
 						}
-					
+						
+						</div>
+					</div>
 				</div>
-			</div>
-		</section>
+				<div className="row no-gutters">
+						<div className="col-12 justify-content-center">
+							<div className="poad__info">
+								{(this.props.details && !this.state.loading) && <button className="button details" onClick={this.toggleShowDetails} >Details</button>}
+							</div>
+						</div>
+				</div>
+		</div>
 		)
 
 	}

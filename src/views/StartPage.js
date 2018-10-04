@@ -42,8 +42,9 @@ class StartPage extends React.Component {
 		return (
 
 				<section className="hero fullscreen-bg" style={{backgroundImage: `url(${imgSrc})`}}>
+				<div className="container-fluid p-0">
 					<Header />
-					<div className="hero__content"  >
+				</div>
 						<div className="cards">
 
 							{data.services.map((service => {
@@ -64,8 +65,6 @@ class StartPage extends React.Component {
 							)
 							}))}
 						</div>
-					</div>
-
 				</section>
 
 		)

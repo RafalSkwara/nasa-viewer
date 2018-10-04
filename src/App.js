@@ -12,6 +12,7 @@ import {
 	Switch,
 	Redirect } from 'react-router-dom'
 
+import Neo from './components/Neo/Neo';
 import aPoaD from './components/aPoaD/aPoaD';
 import EPIC from './components/EPIC/EPIC';
 import HomePage from './views/HomePage';
@@ -29,7 +30,7 @@ class App extends React.Component {
 		return (
 			<Router basename={"/skydelve"} > 
 			{/* change the string in basename to "/" for development */}
-				<div className={"page-wrapper"}>
+
 					<AnimatedSwitch
 
 				    	atEnter={{ opacity: 0 }}
@@ -38,13 +39,14 @@ class App extends React.Component {
       					className="switch-wrapper"
 					  >
 							<Route path={"/"} exact component={HomePage}/>
+							<Route path={"/neo"} component={Neo}/>
 							<Route path={"/epic-earth"} component={EPIC}/>
 							<Route path={"/picture-of-the-day"} component={aPoaD}/>
 							<Route path={"/start"} component={StartPage}/>
 							<Redirect from={"*"} to={"/"} />
 						</AnimatedSwitch>
 
-				</div>	
+
 
 			</Router>
 			)

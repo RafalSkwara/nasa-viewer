@@ -5,48 +5,30 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //actions
-import { 
-	EPICVariantPlus, 
-	EPICVariantMinus, 
-	EPICSetVariant, 
-	changeEPICNatural, 
-	EPICSetImage, 
-	EPICSetLength,
-	EPICSetDate } from '../../actions/EPICActions';
+import { NeoSetDate } from '../../actions/NeoActions';
 //components
 import Calendar from 'rc-calendar';
 import Header from "../Header/Header";
-import Toggle from "../Toggle/Toggle";
 //Icons
 import { Icon } from 'react-icons-kit'
 import { ic_rotate_right, ic_rotate_left } from 'react-icons-kit/md/'
 //styles
 import '../../view_styles/rc-calendar.sass';
-import "./EPICSearch.sass";
+import "./NeoResults.sass";
 
 const mapStateToProps = state => ({
 	apiKey: state.keyReducer.apiKey,
-	natural: state.EPICReducer.natural,
-	imgUrl: state.EPICReducer.imgUrl,
-	day: state.EPICReducer.day,
-	month: state.EPICReducer.month,
-	year: state.EPICReducer.year,
-	variant: state.EPICReducer.variant
+	endDate: state.NeoReducer.endDate,
+	startDate: state.NeoReducer.startDate
 });
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		variantMinus: EPICVariantMinus,
-		variantPlus: EPICVariantPlus,
-		setVariant: EPICSetVariant,
-		changeNatural: changeEPICNatural,
-		setImage: EPICSetImage,
-		setDate: EPICSetDate,
-		setLength: EPICSetLength
+		setDate: setDate
 	}, dispatch);
 }
 
-class EPIC extends React.Component {
+class NeoResults extends React.Component {
 	// eslint-disable-line react/prefer-stateless-function
 	constructor(props) {
 		super(props);
@@ -132,11 +114,10 @@ class EPIC extends React.Component {
 				<Header goBack={true} to={"/start"}/>
 				<div className="row no-gutters">
 					<div className="col-12">
-						<h1 className="main-heading">EPIC</h1>
+						<h1 className="main-heading">Neo - Asteroid Feed</h1>
 					</div>
 					<div className="col col-12">
-						<p>The EPIC API provides information on the daily imagery collected by DSCOVR's Earth Polychromatic Imaging Camera (EPIC) instrument.
-						Here you'll find the most beautiful images of our planet.
+						<p>Asteeroid feed provides its users woth information about every registered asteroid in given time range.
 						</p>
 					</div>
 				</div>
@@ -157,14 +138,10 @@ class EPIC extends React.Component {
 						</Calendar>
 					</div>
 				</div>
+
 				<div className="row no-gutters">
 					<div className="col col-12 justify-content-center">
-						<Toggle toggleLabel="Enhanced Mode" size={60}/>
-					</div>
-				</div>
-				<div className="row no-gutters">
-					<div className="col col-12 justify-content-center">
-						<NavLink to={`${this.props.match.path}/picture`} onClick={this.handleSearch} 
+						<NavLink to={`${this.props.match.path}/results`} onClick={this.handleSearch} 
 							className="btn">
 							Search
 						</NavLink>
@@ -177,4 +154,4 @@ class EPIC extends React.Component {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EPIC)
+export default connect(mapStateToProps, mapDispatchToProps)(NeoResults)

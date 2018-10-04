@@ -1,13 +1,12 @@
 @import '../../view_styles/variables.sass'
-.hero
-	&__header
-		display: flex
-		align-items: center
-		justify-content: space-between
-		width: 100%
-		height: 100px
-		padding: 0 0 0 50px
-		background-color: rgba(0,0,0,0.9)
+.header
+	display: flex
+	align-items: center
+	justify-content: space-between
+	width: 100%
+	height: 100px
+	padding: 0 0 0 50px
+	background-color: rgba(0,0,0,0.9)
 	&__logo
 		height: 100%
 		display: flex
@@ -23,37 +22,34 @@
 			&:hover
 				text-shadow: none
 				color: $lightest-purple
-	.go-back-link
-		display: flex
-		align-items: center
-		justify-content: center
-		color: $dark-purple
-		text-decoration: none
-		text-transform: uppercase
-		letter-spacing: 1.5px
-		font-size: 20px
-		background-color: #fff
-		height: 100px
-		width: 100px
-		&:hover
-			color: $lightest-purple
+.go-back-link
+	display: flex
+	align-items: center
+	justify-content: center
+	color: $dark-purple
+	text-decoration: none
+	text-transform: uppercase
+	letter-spacing: 1.5px
+	font-size: 20px
+	background-color: #fff
+	height: 100px
+	width: 100px
+	&:hover
+		color: $lightest-purple
 	
-@media all and (max-width: 720px)
-	.hero
-		&__header
-			padding: 0 0 0 20px
-			height: 80px
-		.go-back-link
-			height: 80px
-			width: 80px
+@media all and (max-width: 780px)
+	.header
+		padding: 0 0 0 20px
+		height: 80px
+	.go-back-link
+		height: 80px
+		width: 80px
 @media all and (max-width: 640px)
-	.hero
-		&__header
-			padding: 0 0 0 10px
-			min-height: 60px
-			height: 60px
-			position: fixed
-			z-index: 1000
+	.header
+		padding: 0 0 0 10px
+		min-height: 60px
+		height: 60px
+		z-index: 1000
 		&__content
 			padding-top: 80px
 		&__logo
@@ -62,6 +58,6 @@
 				text-decoration: none
 			h1
 				font-size: 20px
-		.go-back-link
-			height: 60px
-			width: 60px
+	.go-back-link
+		height: 60px
+		width: 60px

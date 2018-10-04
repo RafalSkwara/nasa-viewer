@@ -33,23 +33,6 @@ class HomePage extends React.Component {
 		});
 
 	}
-
-	componentDidMount() {
-		let self = this;
-		// - - commented out to stop from hitting the API unnecessary - - //
-		// axios.get(`https://api.nasa.gov/neo/rest/v1/feed?start_date=2018-09-07&end_date=2018-09-08&api_key=LqGe0BDDEOUijMSxA6encVpjHH9ETdmVNMb2tfuX`)
-		// 	.then(function (response) {
-		// 		// handle success
-		// 		console.log("Trial call received successfully")
-		// 		self.setState({
-		// 			visible: true
-		// 		})
-		// 	})
-		// 	.catch(function (error) {
-		// 		// handle error
-		// 		console.log(error);
-		// 	});
-	}
 	
 
 	handleToggle() {
@@ -61,11 +44,12 @@ class HomePage extends React.Component {
 		const bg = require('../assets/img/bg.jpg')
 		const nasaLogo = require('../assets/img/logo-nasa.png')
 		return (
-			<section className="hero fullscreen-bg" 
-				style={{
-					backgroundImage: `url(${bg})`
+
+				<div className="container-fluid p-0" style={{
+					backgroundImage: `url(${bg})`,
+					height: "100vh",
+					width: "100vw"
 				}}>
-				<div className="hero__content flex-column-center">
 					<CSSTransition
 						// in={this.state.visible}
 						in={true}
@@ -75,25 +59,34 @@ class HomePage extends React.Component {
 						classNames="fade"
 						unmountOnExit>
 						<React.Fragment>
-							<div className="title-box flex-column-center" >
-								<div className="title-box--inner flex-column-center" >
-									<h1>SkyDelve</h1>
-									<h2>Powered by</h2>
-									<a href="https://www.nasa.gov" title="Go to NASA"><img src={nasaLogo}></img></a>
+						<div className="row no-gutters spacer-small"></div>
+							<div className="row no-gutters">
+							
+								<div className="col-12">
+								
+								<div className="title-box flex-column-center" >
+									<div className="title-box--inner flex-column-center" >
+										<h1>SkyDelve</h1>
+										<h2>Powered by</h2>
+										<a href="https://www.nasa.gov" title="Go to NASA"><img src={nasaLogo}></img></a>
+									</div>
 								</div>
-							</div>
-							<div className="button-box flex-center" >
-							<NavLink to="/start">
-								<button>
-									Click to begin
-								</button>
-							</NavLink>
+								<div className="row no-gutters spacer-small"></div>
+								<div className="button-box flex-center" >
+								<NavLink to="/start">
+									<button type="button" class="button">
+										Click to begin
+									</button>
+								
+								</NavLink>
+								</div>
+								
+								</div>	
 							</div>
 						</React.Fragment>
 					</CSSTransition>
 				</div>
 
-			</section>
 		)
 	}
 

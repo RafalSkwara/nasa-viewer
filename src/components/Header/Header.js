@@ -19,16 +19,19 @@ class Header extends React.Component {
 
 	render() {
 		return(
-		<header className="hero__header">
-			<div className="hero__logo">
-				<NavLink to="/">
-					<h1>SkyDelve</h1>
-				</NavLink>
-			</div>
-				{this.props.goBack && <NavLink to={this.props.to} className="go-back-link flex-center">
-					<Icon icon={ic_arrow_back} size={34} />
-				</NavLink>}
-		</header>
+				<div className="row no-gutters">
+					<div className="col col-12 justify-content-space-around">
+						<header className="header p-0 pl-3">
+							<div className="header__logo">
+								<NavLink to="/">
+									<h1>SkyDelve</h1>
+								</NavLink>
+							</div>
+								{this.props.goBack && <NavLink to={this.props.to} className="go-back-link flex-center">
+									<Icon icon={ic_arrow_back} size={34} />
+								</NavLink>}
+						</header>
+				</div></div>
 		)
 	}
 

@@ -14,6 +14,7 @@ import "./PoadDetails.sass";
 
 const mapStateToProps = state => ({
 	details: state.APOADReducer.details
+	
 });
 class PoadDetails extends React.Component {
 	// eslint-disable-line react/prefer-stateless-function
@@ -44,7 +45,7 @@ class PoadDetails extends React.Component {
 
 			<div
 				className="poad-details"
-				key={this.props.details.slice(0, 10)}
+				key={Math.random().toFixed(2)}
 				onClick={this.props.clickHandler}
 			>
 				<h3 className="heading">Picture Details</h3>

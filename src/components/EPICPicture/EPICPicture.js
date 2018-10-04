@@ -59,6 +59,7 @@ class EPIC extends React.Component {
 	}
 	componentDidMount() {
 		this.props.clearImage();
+		this.props.setVariant(0);
 		if (this.props.imgUrl) {
 			this.setState({ loading: true })
 		}
@@ -83,6 +84,8 @@ class EPIC extends React.Component {
 	}
 	variantMinus() {
 		// subtract from variant num until 0 reached, then loop over from end
+		console.log(this.props.imgLength, this.props.variant);
+		
 		if (this.props.imgLength !== undefined && this.props.variant > 0) {
 			this.props.variantMinus();
 		} else {
@@ -91,13 +94,13 @@ class EPIC extends React.Component {
 	}
 
 	rotateLeftHandler() { //left or right
-		this.props.variantMinus();
+		this.variantMinus();
 		this.props.clearImage();
 		this.setState({loading: true});
 		this.handleSearch();
 	}
 	rotateRightHandler() { //left or right
-		this.props.variantPlus();
+		this.variantPlus();
 		this.props.clearImage();
 		this.setState({ loading: true });
 		this.handleSearch();
@@ -124,41 +127,55 @@ class EPIC extends React.Component {
 			width: this.state.width
 		}
 		return(
-			<section className="hero fullscreen-bg epic" style={{ backgroundImage: `url(${imgSrc})` }}>
+			<div className="container-fluid p-0 poad poad-picture" style={{
+				backgroundImage: `url(${imgSrc})`,
+				height: "100vh",
+				width: "100vw"
+			}}>
 				<Header goBack={true} to={"/epic-earth"}/>
-				<div className="hero__content flex-column-center">
-					<h1>EPIC</h1>
-					<div className="buttons">
-						<button className="rotate flex-center" onClick={this.rotateLeftHandler} >
-							<Icon icon={ic_rotate_left} size={24}/>
-						</button>
-						<button className="rotate flex-center" onClick={this.rotateRightHandler}> 
-							<Icon icon={ic_rotate_right} size={24}/>							
-						</button>
-					</div>	
-					<div className="image-wrapper">
-						{this.state.loading && <div className="loading-spinner"></div>}
+				<div className="row no-gutters">
+					<div className="col-12">
+						<h1 className="main-heading">EPIC</h1>
+					</div>
+				</div>
+				<div className="row no-gutters">
+					<div className="col-12 justify-content-center">
+						<div className="buttons">
+							<button className="rotate flex-center" onClick={this.rotateLeftHandler} >
+								<Icon icon={ic_rotate_left} size={24}/>
+							</button>
+							<button className="rotate flex-center" onClick={this.rotateRightHandler}> 
+								<Icon icon={ic_rotate_right} size={24}/>							
+							</button>
+						</div>	
+					</div>
+				</div>
+				<div className="row no-gutters">
+					<div className="col-12 justify-content-center">
+						<div className="image-wrapper justify-content-center">
+					{this.state.loading && <div className="spinner-wrapper"><div className="loading-spinner"></div></div>}
 
 							<CSSTransition
-								in={this.props.imgUrl}
-								appear={true}
-								exit={true}
+								in={!this.state.loading}
 								classNames="deshrink"
 								key={this.props.imgUrl}
 								timeout={300}
 							>
 							<img src={this.props.imgUrl}
-								style={styles}
-								onLoad={() => this.setState({ opacity: 1, loading: false, height: '100%', width: 'auto' })}
+								onLoad={() => { 
+									console.log(this.state.loading)
+									this.setState({ opacity: 1, loading: false, height: '100%', width: 'auto' })}
+								}
 								onClick={this.toggleBigImage}
 							/>
 							</CSSTransition>
 					</div>
-				
-
+				</div>
 				</div>
 
-			</section>
+				
+
+			</div>
 		)
 	}
 

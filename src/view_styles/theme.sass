@@ -1,35 +1,46 @@
 @import "variables"
+@import "~bootstrap/scss/bootstrap" 
 @import url('https://fonts.googleapis.com/css?family=Exo:300,400,500,700')
 @import url('https://fonts.googleapis.com/css?family=Notable')
 html, .root
-  font-size: 16px
-  background-color: #000
+	font-size: 16px
+	background-color: #000
 
 body
-  margin: 0
-  padding: 0
+	margin: 0
+	padding: 0
 
 *, button
-  font-family: 'Exo', Helvetica, Arial, Helvetica, sans-serif
-  margin: 0
-  padding: 0
-  box-sizing: border-box
-  
+	font-family: 'Exo', Helvetica, Arial, Helvetica, sans-serif
+	margin: 0
+	padding: 0
+	box-sizing: border-box
+
 button
-  border: none
-  outline: none
-  flex-shrink: 0
-  height: 50px
-  &:focus
-	  outline: none
-  &:hover
-	  cursor: pointer
+	border: none
+	outline: none
+	flex-shrink: 0
+	height: 50px
+	&:focus
+		outline: none
+	&:hover
+		cursor: pointer
+		color: #fff
+
+.spacer-small
+	height: 10vh
+	width: 100%
 
 
+
+.row
+	.align-items-center,
+	.justify-content-center
+		display: flex !important
 body
-  margin: 0 auto
-  min-width: 100vw
-  background-color: $white
+	margin: 0 auto
+	min-width: 100vw
+	background-color: $white
 
 .page-wrapper
 	width: 100vw
@@ -43,6 +54,8 @@ section
 a
 	text-decoration: none
 	color: inherit
+	&:hover
+		text-decoration: none
 
 .flex-center
 	display: flex
@@ -55,19 +68,13 @@ a
 	justify-content: center
 	align-items: center
 
-.fullscreen-bg 
-	max-height: 100vh
-	top: 0
-	right: 0
-	bottom: 0
-	left: 0
 
-
-.btn
+.button, .btn
 	outline: none
 	border: none
 	display: block
-	padding: 12px 24px
+	// padding: 12px 24px
+	color: #fff
 	font-size: 20px
 	border-radius: 10px
 	background-color: rgba(0,0,0,0.6)
@@ -78,8 +85,16 @@ a
 		background-color: $medium-purple
 		// color: $lightest-purple
 		border: 2px solid $dark-purple
+	a
+		text-decoration: none
+
+@media all and (max-width: 640px)	
+	.spacer-small
+		height: 5vh
 
 
+
+// animations and transitions
 .fade-appear 
 	transform: scale(.9)
  	opacity: 0.01
@@ -101,8 +116,6 @@ a
   transition: all 500ms ease-out
 .fade-exit-done
 	opacity: 0
-.switch-wrapper 
-  position: relative
 
 .switch-wrapper > div 
   position: absolute
@@ -120,7 +133,7 @@ a
 	opacity: 0
 
 .deshrink-enter.deshrink-enter-active
-	opacity: 0
+	opacity: 1
 	transition: all 300ms linear
 .deshrink-enter-done
 	opacity: 1
@@ -163,7 +176,14 @@ a
 	transition: all 300ms ease-out
 .photo-show-exit-done
 	opacity: 0
-
+.spinner-wrapper
+	width: 100%
+	height: 100%
+	display: flex
+	align-items: center
+	justify-content: center
+	height: 400px
+	min-height: 200px
 .loading-spinner
 	height: 80px
 	width: 80px

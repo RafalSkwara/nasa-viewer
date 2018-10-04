@@ -80,13 +80,24 @@ class aPoaDSearch extends React.Component {
 	render() {
 		const imgSrc = require('../../assets/img/bg2.jpg');
 		return (
-			<section className="hero fullscreen-bg poad-search" style={{ backgroundImage: `url(${imgSrc})` }}>
+			<div className="container-fluid p-0 poad poad-search" style={{
+				backgroundImage: `url(${imgSrc})`,
+				height: "100vh",
+				width: "100vw"
+			}}>
 			<Header goBack to={"/start"} />
-			<div className="hero__content">
-				<h1>A Picture of the Day</h1>
-				<p>Welcome to Astronomy Picture of the Day image viewer. Here you can see thousands of amazing images chosen by NASA that come with detailed explanations.</p>
-				<p>Just pick a date and click the Search button to begin your journey thorugh space and time. Have fun!</p>
-				<div className="poad__calendar-wrap">
+			<div className="row no-gutters">
+				<div className="col-12">
+					<h1 className="main-heading">A Picture of the Day</h1>				
+				</div>
+				<div className="col col-12">
+					<p>Welcome to Astronomy Picture of the Day image viewer. Here you can see thousands of amazing images chosen by NASA that come with detailed explanations.</p>
+					<p>Just pick a date and click the Search button to begin your journey thorugh space and time. Have fun!</p>				
+				</div>
+			</div>
+			<div className="row no-gutters spacer-small"></div>
+			<div className="row no-gutters">
+				<div className="col col-12 justify-content-center">
 					<Calendar 
 						className="calendar"
 						onChange={ (value) => this.handleChange(value) } 
@@ -99,6 +110,10 @@ class aPoaDSearch extends React.Component {
 							}
 						}
 					</Calendar>
+				</div>
+			</div>
+			<div className="row no-gutters">
+				<div className="col col-12 justify-content-center">
 					<NavLink 
 						to={`${this.props.match.path}/picture`} 
 						onClick={this.handleSearch}
@@ -106,9 +121,11 @@ class aPoaDSearch extends React.Component {
 					>
 						Search
 					</NavLink>
+				
 				</div>
 			</div>
-			</section>
+			
+			</div>
 		)
 	}
 
