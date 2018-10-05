@@ -114,11 +114,16 @@ class EPIC extends React.Component {
 		
 		axios.get(url)
 			.then(res => {
-				let variant = this.props.variant
-				this.props.setImage(
-					 `https://epic.gsfc.nasa.gov/archive/${this.props.natural? "natural" : "enhanced"}/${this.props.year}/${this.props.month}/${this.props.day}/jpg/`+res.data[variant].image+'.jpg')
-				this.props.setLength(res.data.length)
+				if (res.status === 200) {
+					let variant = this.props.variant
+					this.props.setImage(
+						 `https://epic.gsfc.nasa.gov/archive/${this.props.natural? "natural" : "enhanced"}/${this.props.year}/${this.props.month}/${this.props.day}/jpg/`+res.data[variant].image+'.jpg')
+					this.props.setLength(res.data.length)
+				}
+				
 			})
+			.catch((err) => console.log(err)
+			)
 	}
 
 	render() {

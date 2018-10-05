@@ -5,11 +5,12 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //actions
-import { NeoSetStartDate, NeoSetEndDate } from '../../actions/NeoActions';
+import { NeoSetStartDate, NeoGetAllDates, NeoGetNeos } from '../../actions/NeoActions';
 //components
 import Calendar from 'rc-calendar';
 import Header from "../Header/Header";
 import Toggle from "../Toggle/Toggle";
+
 //Icons
 import { Icon } from 'react-icons-kit'
 import { ic_rotate_right, ic_rotate_left } from 'react-icons-kit/md/'
@@ -19,14 +20,16 @@ import "./NeoSearch.sass";
 
 const mapStateToProps = state => ({
 	apiKey: state.keyReducer.apiKey,
-	endDate: state.NeoReducer.endDate,
-	startDate: state.NeoReducer.startDate
+	startDate: state.NeoReducer.startDate,
+	dates: state.NeoReducer.dates,
+	asteroids: state.NeoReducer.asteroids
 });
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		setStartDate: NeoSetStartDate,
-		setEndDate: NeoSetEndDate
+		getDates: NeoGetAllDates,
+		getNeos: NeoGetNeos
 	}, dispatch);
 }
 
@@ -36,9 +39,8 @@ class NeoSearch extends React.Component {
 		super(props);
 		this.state = {
 			value: '',
-			request_base: 'https://api.nasa.gov/neo/rest/v1/feed?',
+			request_base: 'https://api.nasa.gov/neo/rest/v1/feed',
 		}
-		this.handleEnd = this.handleEnd.bind(this)
 		this.handleStart = this.handleStart.bind(this)
 		this.handleSearch = this.handleSearch.bind(this)
 
@@ -47,7 +49,6 @@ class NeoSearch extends React.Component {
 	buildUrl() {
 		let url = this.state.request_base;
 		url = this.props.startDate ? url + `?start_date=${this.props.startDate}` : url;
-		url = this.props.endDate ? url + `&end_date=${this.props.endDate}` : url;
 
 		return url + '&api_key=' + this.props.apiKey;
 	}
@@ -69,25 +70,31 @@ class NeoSearch extends React.Component {
 		const { day, month, year } = dateObj;
 		this.props.setStartDate(`${year}-${month}-${day}`)
 	}
-	handleEnd(val) {
-		// update store with selected date
-		const dateObj = this.formatDate(val);
-		const {day, month, year } = dateObj;
-		this.props.setEndDate(`${year}-${month}-${day}`)
-	}
-	
 
 	handleSearch() {
 		let url = this.buildUrl();
 		console.log(url)
 		axios.get(url)
 			.then(res => {
-				console.table(res.data.near_earth_objects)
+				let neos = res.data.near_earth_objects;
+				let dates = Object.keys(neos);
+				let resultArray = Object.keys(neos).map(key => neos[key]);
+				
+				this.props.getDates(dates);
+				this.props.getNeos(resultArray)
+				// dates.forEach(date => {
+				// 	console.log(neos[date])
+				// })
+			})
+			.catch(err => {
+				console.log(error);
+				
 			})
 	}
 
 	render() {
 		const imgSrc = require('../../assets/img/bg2.jpg');
+
 		return(
 			<div className="container-fluid p-0 neo neo-search" style={{
 				backgroundImage: `url(${imgSrc})`,
@@ -100,13 +107,17 @@ class NeoSearch extends React.Component {
 						<h1 className="main-heading">Neo - Asteroid Feed</h1>
 					</div>
 					<div className="col col-12">
-						<p>Asteeroid feed provides its users woth information about every registered asteroid in given time range.
+						<p>NEO (Near-Earth Objects) feed provides its users with information 
+							about every registered asteroid in given time range. 
+							Pick a start date and see the data for the week 
+							that follows the chosen date.
 						</p>
 					</div>
 				</div>
 				<div className="row no-gutters spacer-small"></div>
 				<div className="row no-gutters">
-					<div className="col col-12 justify-content-center">
+					<div className="col col-12 calendar-column">
+						<p>Pick Start Date</p>
 						<Calendar
 							className="calendar"
 							onChange={(value) => this.handleStart(value)}
@@ -119,31 +130,25 @@ class NeoSearch extends React.Component {
 								}
 							}
 						</Calendar>
-						<Calendar
-							className="calendar"
-							onChange={(value) => this.handleEnd(value)}
-							showDateInput={false}
-							showToday={false}
-						>
-							{
-								({ value }) => {
-									return (<input type="text" name="endDate" value={value} />);
-								}
-							}
-						</Calendar>
+					</div>
+				</div>
+				<div className="row no-gutters spacer-small"></div>
+				<div className="row no-gutters">
+					<div className="col col-12 justify-content-center">
+						{/* <a  onClick={this.handleSearch} 
+							className="btn">
+							Search
+						</a> */}
+						<NavLink to={`${this.props.match.path}/results`} onClick={this.handleSearch} 
+							className="btn">
+							Search
+						</NavLink>
 					</div>
 				</div>
 
 				<div className="row no-gutters">
 					<div className="col col-12 justify-content-center">
-						<a  onClick={this.handleSearch} 
-							className="btn">
-							Search
-						</a>
-						{/* <NavLink to={`${this.props.match.path}/results`} onClick={this.handleSearch} 
-							className="btn">
-							Search
-						</NavLink> */}
+
 					</div>
 				</div>
 				

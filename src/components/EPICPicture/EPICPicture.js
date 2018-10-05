@@ -5,7 +5,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //actions
-import { EPICVariantPlus, EPICVariantMinus, EPICSetVariant, changeEPICNatural, EPICClearImage, EPICSetImage } from '../../actions/EPICActions';
+import { EPICVariantPlus, EPICVariantMinus, EPICSetVariant, changeEPICNatural, EPICClearImage, EPICSetImage, EPICSetLength } from '../../actions/EPICActions';
 //components
 import Calendar from 'rc-calendar';
 import Header from "../Header/Header";
@@ -35,6 +35,7 @@ function mapDispatchToProps(dispatch) {
 		clearImage: EPICClearImage,
 		changeNatural: changeEPICNatural,
 		setImage: EPICSetImage,
+		setLength: EPICSetLength
 	}, dispatch);
 }
 
@@ -45,8 +46,6 @@ class EPIC extends React.Component {
 		this.state = {
 			value: '',
 			request_base: 'https://api.nasa.gov/EPIC/api/',
-			picture: '',
-			imgLength: 2,
 			opacity: 0,
 			loading: true,
 			height: 0,
@@ -56,6 +55,7 @@ class EPIC extends React.Component {
 		this.handleSearch = this.handleSearch.bind(this)
 		this.rotateLeftHandler = this.rotateLeftHandler.bind(this)
 		this.rotateRightHandler = this.rotateRightHandler.bind(this)
+		this.loadHandler = this.loadHandler.bind(this)
 	}
 	componentDidMount() {
 		this.props.clearImage();
@@ -84,31 +84,39 @@ class EPIC extends React.Component {
 	}
 	variantMinus() {
 		// subtract from variant num until 0 reached, then loop over from end
-		console.log(this.props.imgLength, this.props.variant);
+		console.log(this.props.imgLength, this.props.variant, this.state.imgLength - 1);
 		
 		if (this.props.imgLength !== undefined && this.props.variant > 0) {
 			this.props.variantMinus();
 		} else {
-			this.props.setVariant(this.state.imgLength - 1)
+			this.props.setVariant(this.props.imgLength - 1)
 		}
 	}
 
 	rotateLeftHandler() { //left or right
 		this.variantMinus();
 		this.props.clearImage();
-		this.setState({loading: true});
+		this.setState({
+			opacity: 0,
+			loading: true,
+			height: 0,
+			width: 0});
 		this.handleSearch();
 	}
 	rotateRightHandler() { //left or right
 		this.variantPlus();
 		this.props.clearImage();
-		this.setState({ loading: true });
+		this.setState({
+			opacity: 0,
+			loading: true,
+			height: 0,
+			width: 0 });
 		this.handleSearch();
 	}
 
 	handleSearch() {
 		let url = this.buildUrl();
-
+		
 		axios.get(url)
 			.then(res => {
 				let variant = this.props.variant
@@ -116,6 +124,12 @@ class EPIC extends React.Component {
 					`https://epic.gsfc.nasa.gov/archive/${this.props.natural ? "natural" : "enhanced"}/${this.props.year}/${this.props.month}/${this.props.day}/jpg/` + res.data[this.props.variant].image + '.jpg')
 				this.props.setLength(res.data.length)
 			})
+	}
+
+	loadHandler() {
+		console.log(this.state.loading)
+		this.setState({ opacity: 1, loading: false, height: '100%', width: 'auto' })
+		console.log(this.state.loading)
 	}
 
 	render() {
@@ -162,10 +176,7 @@ class EPIC extends React.Component {
 								timeout={300}
 							>
 							<img src={this.props.imgUrl}
-								onLoad={() => { 
-									console.log(this.state.loading)
-									this.setState({ opacity: 1, loading: false, height: '100%', width: 'auto' })}
-								}
+								onLoad={this.loadHandler}
 								onClick={this.toggleBigImage}
 							/>
 							</CSSTransition>

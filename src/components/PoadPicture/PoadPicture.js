@@ -11,7 +11,6 @@ import {
 	Redirect
 } from 'react-router-dom'
 import Header from "../Header/Header";
-import BigPicture from "../BigPicture/BigPicture";
 import PoadDetails from '../PoadDetails/PoadDetails';
 import "./PoadPicture.sass";
 
@@ -98,7 +97,7 @@ class PoadPicture extends React.Component {
 			height: this.state.height,
 			width: this.state.width
 		}
-		const imgSrc = require('../../assets/img/bg2.jpg');
+		const imgSrc = require('../../assets/img/bg_pattern.png');
 		return (
 			<div className="container-fluid p-0 poad poad-picture" style={{
 				backgroundImage: `url(${imgSrc})`,

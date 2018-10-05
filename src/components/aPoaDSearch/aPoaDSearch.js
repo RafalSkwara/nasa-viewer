@@ -36,7 +36,7 @@ class aPoaDSearch extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: '',
+			value: this.formatDate(new Date()),
 			request_base: 'https://api.nasa.gov/planetary/apod?api_key=',
 			picture: ''
 
@@ -44,20 +44,25 @@ class aPoaDSearch extends React.Component {
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSearch = this.handleSearch.bind(this)
 	}
-
+	// helpers
 	buildUrl() {
 		let url = this.state.request_base + this.props.apiKey;
 		return this.state.value ? url += `&date=${this.state.value}` : url
 	}
 
+	formatDate(dateObj) {
+		let dat = dateObj;
+		const year = dat.getFullYear();
+		const month = dat.getMonth() + 1;
+		const day = dat.getDate();
+		return `${year}-${month}-${day}`;
+	}
+	// handlers
 	handleChange(val) {
 		//update the state with selected date
-		let dat = val._d;
-		const year = val._d.getFullYear();
-		const month = val._d.getMonth() + 1;
-		const day = val._d.getDate();
+
 		this.setState({
-			value: `${year}-${month}-${day}`
+			value: this.formatDate(val._d)
 		})
 		console.log(this.buildUrl())
 	}

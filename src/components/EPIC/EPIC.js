@@ -38,90 +38,14 @@ class EPIC extends React.Component {
 	// eslint-disable-line react/prefer-stateless-function
 	constructor(props) {
 		super(props);
-		this.state = {
-			value: '',
-			request_base: 'https://api.nasa.gov/EPIC/api/',
-			picture: '',
-			imgLength: 2
-
-		}
-		this.handleChange = this.handleChange.bind(this)
-		this.handleSearch = this.handleSearch.bind(this)
-		this.rotateLeftHandler = this.rotateLeftHandler.bind(this)
-		this.rotateRightHandler = this.rotateRightHandler.bind(this)
 	}
 
-	buildUrl() {
-		let url = this.state.request_base;
-		url = this.props.natural ? url + `natural` : url + 'enhanced';
-		url = this.state.year ? url + `/date/${this.state.year}-${this.state.month}-${this.state.day}` : url;
 
-		return url + '?api_key=' + this.props.apiKey;;
-	}
-
-	handleChange(val) {
-		// update state with selected date
-		let dat = val._d;
-		let year = val._d.getFullYear();
-		let month = val._d.getMonth() + 1;
-		month = month <= 9 ? "0"+month : month
-		let day = val._d.getDate();
-		day = day <= 9 ? "0"+day : day;
-		this.setState({
-			day: day,
-			month: month,
-			year: year
-		});
-		this.props.setVariant(0)
-	}
-	
-	variantPlus() {
-		// add to variant number until max number reached, then start from 0
-		if (this.state.imgLength !== undefined && this.props.variant < this.state.imgLength-1) {
-			this.props.variantPlus();
-		} else {
-			this.props.setVariant(0)
-		}
-	}
-	variantMinus() {
-		// subtract from variant num until 0 reached, then loop over from end
-		if (this.state.imgLength !== undefined && this.props.variant > 0) {
-			this.props.variantMinus();
-		} else {
-			this.props.setVariant(this.state.imgLength - 1)
-		}
-	}
-
-	rotateLeftHandler() { //left or right
-		this.variantMinus();
-		this.handleSearch();
-	}
-	rotateRightHandler() { //left or right
-		this.variantPlus();
-		this.handleSearch();
-	}
-
-	handleSearch() {
-		let url = this.buildUrl();
-		
-		axios.get(url)
-			.then(res => {
-				let variant = this.props.variant
-				this.setState({
-					picture: `https://epic.gsfc.nasa.gov/archive/
-					${this.props.natural? "natural" : "enhanced"}
-					/${this.state.year}/${this.state.month}/${this.state.day}
-					/jpg/`+res.data[variant].image+'.jpg',
-					imgLength: res.data.length
-				})
-			})
-	}
 
 	render() {
 		const imgSrc = require('../../assets/img/bg2.jpg');
 		return(
 			<AnimatedSwitch
-
 				atEnter={{ opacity: 0 }}
 				atLeave={{ opacity: 0 }}
 				atActive={{ opacity: 1 }}

@@ -1,6 +1,8 @@
 export const NeoReducer = (state = {
 	startDate: '',
-	endDate: ''
+	endDate: '',
+	dates: [],
+	asteroids: []
 }, action) => {
 	switch (action.type) {
 		case 'NEO_SET_START_DATE':
@@ -8,10 +10,20 @@ export const NeoReducer = (state = {
 				...state,
 				startDate: action.payload,
 			}
-		case 'NEO_SET_END_DATE':
+		case 'NEO_GET_ALL_DATES':
 			return {
 				...state,
-				endDate: action.payload,
+				dates: action.payload,
+			}
+		case 'NEO_GET_NEOS':
+			return {
+				...state,
+			asteroids: action.payload,
+			}
+		case 'NEO_CLEAR_NEOS':
+			return {
+				...state,
+			asteroids: [],
 			}
 
 		default:

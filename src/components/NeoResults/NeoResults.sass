@@ -1,4 +1,4 @@
-.epic
+.neo
 	.hero__content
 		display: flex
 		align-items: center
@@ -34,9 +34,12 @@
 	.rotate
 		width: 50px
 
-
-.epic-search
+	
+.neo-results
+	background:
+		size: 5px 5px
 	color: #fff
+	min-height: 100vh
 	div.switch-wrapper > div,
 	div.switch-wrapper 
 		height: 100%
@@ -55,20 +58,22 @@
 		padding: 5px 20px
 		margin: 0
 		align-self: flex-start
-	.epic__calendar-wrap
-		margin-top: 30px
-		width: 100%
-		display: flex
-		flex-direction: column
-		align-items: center
-		justify-content: space-around
-	.search-button
+
 		margin-top: 10px
 		&:hover
 			color: #fff
+	.flex-column
+		display: flex
+		align-items: center
+		flex-direction: column
+		justify-content: center
+		h1, h2, h3
+			text-align: center
+			width: 100%
+			background-color: rgba(0,0,0,0.4)
 
 @media all and (max-width: 1000px)
-	.epic-search
+	.neo-search
 		h1.main-heading
 			padding: 15px 0 0 0
 			font-size: 26px
@@ -76,20 +81,20 @@
 		p
 			font-size: 18px
 @media all and (max-width: 720px)
-	.epic-search
+	.neo-search
 		h1.main-heading
 			padding: 15px 0
 			font-size: 24px
 		p
 			font-size: 16px
-		.epic__calendar-wrap
+		.neo__calendar-wrap
 			margin-top: 10px
 @media all and (max-width: 640px)
-	.epic-search
+	.neo-search
 		h1.main-heading
 			padding: 10px 0
 			font-size: 20px
 		p
 			font-size: 15px
-		.epic__calendar-wrap
+		.neo__calendar-wrap
 			margin-top: 10px
