@@ -7,6 +7,8 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //actions
 
 import { NeoClearNeo } from '../../actions/NeoActions';
+import bgImage from '../../assets/img/bg_pattern.png'
+
 //components
 import Header from "../Header/Header";
 import NeoTable from "../NeoTable/NeoTable";
@@ -49,7 +51,7 @@ class NeoResults extends React.Component {
 		const imgSrc = require('../../assets/img/bg_pattern.png');
 		return(
 			<div className="container-fluid p-0 neo neo-results" style={{
-				backgroundImage: `url(${imgSrc})`,
+				backgroundImage: `url(${bgImage})`,
 				width: "100vw",
 				mimnHeight: "100vh"
 			}}>

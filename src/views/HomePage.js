@@ -45,7 +45,7 @@ class HomePage extends React.Component {
 		const nasaLogo = require('../assets/img/logo-nasa.png')
 		return (
 
-				<div className="container-fluid p-0" style={{
+				<div className="container-fluid p-0 main-container" style={{
 					backgroundImage: `url(${bg})`,
 					height: "100vh",
 					width: "100vw"
@@ -74,7 +74,7 @@ class HomePage extends React.Component {
 								<div className="row no-gutters spacer-small"></div>
 								<div className="button-box flex-center" >
 								<NavLink to="/start">
-									<button type="button" class="button">
+									<button type="button" className="button">
 										Click to begin
 									</button>
 								

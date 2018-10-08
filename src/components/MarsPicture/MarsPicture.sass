@@ -1,0 +1,75 @@
+.mars
+
+	img
+		max-height: calc(100vh - 270px)
+		max-width: 100vw
+	.hero__content
+		display: flex
+		align-items: center
+		flex-direction: column
+		justify-content: flex-start
+		background-color: rgba(0,0,0,0.6)
+		max-width: 1440px
+		color: #fff
+		div.switch-wrapper > div,
+		div.switch-wrapper 
+			height: 100%
+			width: 100%
+			display: flex
+			flex-direction: column
+			align-items: center
+			justify-content: flex-start
+		h1
+			font-size: 32px
+
+			padding: 20px
+		h2
+			margin: 0 40px 40px 40px
+			font-weight: 400
+		flex-direction: column
+	.image-wrapper
+		max-height: 100%
+		max-width: 100%
+		width: 100vw
+		display: flex
+		align-items: center
+		justify-content: center
+		img
+			transform-origin: center
+.buttons
+	margin: 10px 0
+	width: 60%
+	display: flex
+	flex-direction: row
+	justify-content: center
+.rotate
+	width: 50px
+	.column-right
+		width: 70%
+		p
+			padding: 10px 0
+			height: 60px
+@media all and(max-width: 1000px)
+	html, body
+		overflow: auto
+	.mars .hero__content
+		height: auto
+		display: block	
+	.mars .hero__content h1
+		font-size: 24px
+		margin: 0
+		text-align: center
+		padding: 8px 0
+	.mars .hero__content h2
+		margin: 0 15px 5px 15px
+		font-size: 18px
+	.hero.fullscreen-bg.mars
+		max-height: auto
+		overflow: auto
+@media all and (max-width: 720px)
+	.mars
+		img
+			max-height: calc(100vh - 220px)
+	.mars
+		.hero__content
+			padding: 70px 10px 0 10px

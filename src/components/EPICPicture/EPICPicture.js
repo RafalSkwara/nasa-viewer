@@ -5,16 +5,17 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //actions
-import { EPICVariantPlus, EPICVariantMinus, EPICSetVariant, changeEPICNatural, EPICClearImage, EPICSetImage, EPICSetLength } from '../../actions/EPICActions';
+import { EPICVariantPlus, EPICVariantMinus, EPICSetVariant, EPICClearImage, EPICSetImage, EPICSetLength } from '../../actions/EPICActions';
 //components
-import Calendar from 'rc-calendar';
 import Header from "../Header/Header";
-import Toggle from "../Toggle/Toggle";
+
 //Icons
 import { Icon } from 'react-icons-kit'
 import { ic_rotate_right, ic_rotate_left } from 'react-icons-kit/md/'
 //styles
 import "./EPICPicture.sass";
+//images
+import bgImage from '../../assets/img/bg2.jpg'
 
 const mapStateToProps = state => ({
 	apiKey: state.keyReducer.apiKey,
@@ -33,13 +34,12 @@ function mapDispatchToProps(dispatch) {
 		variantPlus: EPICVariantPlus,
 		setVariant: EPICSetVariant,
 		clearImage: EPICClearImage,
-		changeNatural: changeEPICNatural,
 		setImage: EPICSetImage,
 		setLength: EPICSetLength
 	}, dispatch);
 }
 
-class EPIC extends React.Component {
+class EPICPicture extends React.Component {
 	// eslint-disable-line react/prefer-stateless-function
 	constructor(props) {
 		super(props);
@@ -127,9 +127,8 @@ class EPIC extends React.Component {
 	}
 
 	loadHandler() {
-		console.log(this.state.loading)
+		console.log('Img loaded')
 		this.setState({ opacity: 1, loading: false, height: '100%', width: 'auto' })
-		console.log(this.state.loading)
 	}
 
 	render() {
@@ -142,7 +141,7 @@ class EPIC extends React.Component {
 		}
 		return(
 			<div className="container-fluid p-0 poad poad-picture" style={{
-				backgroundImage: `url(${imgSrc})`,
+				backgroundImage: `url(${bgImage})`,
 				height: "100vh",
 				width: "100vw"
 			}}>
@@ -176,6 +175,7 @@ class EPIC extends React.Component {
 								timeout={300}
 							>
 							<img src={this.props.imgUrl}
+							style={styles}
 								onLoad={this.loadHandler}
 								onClick={this.toggleBigImage}
 							/>
@@ -192,4 +192,4 @@ class EPIC extends React.Component {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EPIC)
+export default connect(mapStateToProps, mapDispatchToProps)(EPICPicture)

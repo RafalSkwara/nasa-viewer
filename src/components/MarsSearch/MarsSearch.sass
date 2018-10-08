@@ -1,0 +1,123 @@
+@import '../../view_styles/variables.sass'
+.mars
+	div.switch-wrapper > div,
+	div.switch-wrapper 
+		height: 100%
+		width: 100%
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: flex-start
+	h1
+		font-size: 32px
+
+		padding: 20px
+	h2.selected
+		margin: 0 40px 40px 40px
+		font-weight: 300
+		span
+			font-weight: 500
+	h2
+		margin: 0 0 20px 0
+	p
+		margin-bottom: 20px
+
+	.buttons
+		margin: 10px 0
+		width: 60%
+		display: flex
+		flex-direction: row
+		justify-content: center
+	.rotate
+		width: 50px
+	.col
+		flex-direction: column
+		.button
+			width: 90%
+			margin-bottom: 10px
+	.search-button
+		width: 300px
+		align-self: center
+
+.mars-search
+	color: #fff
+	div.switch-wrapper > div,
+	div.switch-wrapper 
+		height: 100%
+		width: 100%
+		display: flex
+		flex-direction: column
+		align-items: center
+		justify-content: flex-start
+	h1
+		text-align: center
+		font-size: 32px
+		padding: 20px
+		margin: 0
+	h2
+		text-align: center
+		font-size: 26px
+	p
+		font-size: 22px
+		padding: 5px 20px
+		margin: 0
+		align-self: center
+
+
+	.search-button
+		margin-top: 10px
+		&:hover
+			color: #fff
+	.search-input__wrapper
+		display: flex
+		align-items: center
+		button
+			width: 60px
+			height: 60px
+	input.search-input
+		height: 60px
+		width: 120px
+		text-align: center
+		line-height: 60px
+		font-size: 28px
+		padding: 0
+		appearance: textfield
+
+@media all and (max-width: 1000px)
+	.mars-search
+		h1.main-heading
+			padding: 15px 0 0 0
+			font-size: 26px
+			margin: 0
+		p
+			font-size: 18px
+@media all and (max-width: 720px)
+	.mars-search
+		h1.main-heading
+			padding: 15px 0
+			font-size: 24px
+		h2
+			text-align: center
+			font-size: 18px
+		h2.selected
+			margin-bottom: 10px
+	
+		p
+			font-size: 16px
+		button.btn.button
+			font-size: 16px
+			height: 40px
+		.col-1-md,
+		.col-md-1
+			flex: 0 0	
+		.row .align-items-center, .row .justify-content-center
+			flex: 1 auto
+@media all and (max-width: 640px)
+	.mars-search
+		h1.main-heading
+			padding: 10px 0
+			font-size: 20px
+		p
+			font-size: 15px
+		.mars__calendar-wrap
+			margin-top: 10px

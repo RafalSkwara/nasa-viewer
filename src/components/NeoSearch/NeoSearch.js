@@ -11,6 +11,7 @@ import Calendar from 'rc-calendar';
 import Header from "../Header/Header";
 import Toggle from "../Toggle/Toggle";
 
+import bgImage from '../../assets/img/bg2.jpg'
 //Icons
 import { Icon } from 'react-icons-kit'
 import { ic_rotate_right, ic_rotate_left } from 'react-icons-kit/md/'
@@ -97,7 +98,7 @@ class NeoSearch extends React.Component {
 
 		return(
 			<div className="container-fluid p-0 neo neo-search" style={{
-				backgroundImage: `url(${imgSrc})`,
+				backgroundImage: `url(${bgImage})`,
 				height: "100vh",
 				width: "100vw"
 			}}>
@@ -108,9 +109,9 @@ class NeoSearch extends React.Component {
 					</div>
 					<div className="col col-12">
 						<p>NEO (Near-Earth Objects) feed provides its users with information 
-							about every registered asteroid in given time range. 
+							about every registered asteroid based on their closest approach date to Earth. 
 							Pick a start date and see the data for the week 
-							that follows the chosen date.
+							that follows it.
 						</p>
 					</div>
 				</div>

@@ -13,7 +13,8 @@ import {
 import Header from "../Header/Header";
 import PoadDetails from '../PoadDetails/PoadDetails';
 import "./PoadPicture.sass";
-
+//images
+import bgImage from '../../assets/img/bg_pattern.png'
 const mapStateToProps = state => ({
 	apiKey: state.keyReducer.apiKey,
 	imgUrl: state.APOADReducer.imgUrl,
@@ -100,7 +101,7 @@ class PoadPicture extends React.Component {
 		const imgSrc = require('../../assets/img/bg_pattern.png');
 		return (
 			<div className="container-fluid p-0 poad poad-picture" style={{
-				backgroundImage: `url(${imgSrc})`,
+				backgroundImage: `url(${bgImage})`,
 				height: "100vh",
 				width: "100vw"
 			}}>

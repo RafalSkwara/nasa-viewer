@@ -15,6 +15,7 @@ import {
 import Neo from './components/Neo/Neo';
 import aPoaD from './components/aPoaD/aPoaD';
 import EPIC from './components/EPIC/EPIC';
+import Mars from './components/Mars/Mars';
 import HomePage from './views/HomePage';
 import StartPage from './views/StartPage';
 
@@ -39,6 +40,7 @@ class App extends React.Component {
       					className="switch-wrapper"
 					  >
 							<Route path={"/"} exact component={HomePage}/>
+							<Route path={"/mars-photos"} component={Mars}/>
 							<Route path={"/neo"} component={Neo}/>
 							<Route path={"/epic-earth"} component={EPIC}/>
 							<Route path={"/picture-of-the-day"} component={aPoaD}/>

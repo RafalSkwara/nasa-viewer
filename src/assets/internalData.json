@@ -1,4 +1,5 @@
 {
 	"services": ["Astronomy Picture of the Day", "EPIC Earth Images", "Neo - Asteorid Feed", "Mars Rover Photos"],
-	"service-urls": ["picture-of-the-day", "epic-earth", "neo", "mars-photos"]
+	"service-urls": ["picture-of-the-day", "epic-earth", "neo", "mars-photos"],
+	"rovers": ["opportunity", "spirit", "curiosity"]
 }

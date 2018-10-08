@@ -46,7 +46,7 @@ function mapDispatchToProps(dispatch) {
 	}, dispatch);
 }
 
-class EPIC extends React.Component {
+class EPICSearch extends React.Component {
 	// eslint-disable-line react/prefer-stateless-function
 	constructor(props) {
 		super(props);
@@ -182,4 +182,4 @@ class EPIC extends React.Component {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EPIC)
+export default connect(mapStateToProps, mapDispatchToProps)(EPICSearch)

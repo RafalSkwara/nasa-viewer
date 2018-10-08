@@ -87,7 +87,7 @@ class NeoTable extends React.Component {
 							<tr>
 								<td width="60%">Relative velocity at last close approach</td>
 
-								<td width="40%">{Number(data.close_approach_data[0].relative_velocity.kilometers_per_second).toFixed(2)+'km/s'}</td>
+								<td width="40%">{Number(data.close_approach_data[0].relative_velocity.kilometers_per_second).toFixed(2)+' km/s'}</td>
 							</tr>
 								}
 							<tr>
