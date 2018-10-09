@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //actions
 import { 
@@ -17,9 +17,7 @@ import {
 import Calendar from 'rc-calendar';
 import Header from "../Header/Header";
 import Toggle from "../Toggle/Toggle";
-//Icons
-import { Icon } from 'react-icons-kit'
-import { ic_rotate_right, ic_rotate_left } from 'react-icons-kit/md/'
+
 //styles
 import '../../view_styles/rc-calendar.sass';
 import "./EPICSearch.sass";
@@ -57,6 +55,7 @@ class EPICSearch extends React.Component {
 			imgLength: 2
 
 		}
+
 		this.handleChange = this.handleChange.bind(this)
 		this.handleSearch = this.handleSearch.bind(this)
 		this.rotateLeftHandler = this.rotateLeftHandler.bind(this)
@@ -100,11 +99,11 @@ class EPICSearch extends React.Component {
 		}
 	}
 
-	rotateLeftHandler() { //left or right
+	rotateLeftHandler() { 
 		this.variantMinus();
 		this.handleSearch();
 	}
-	rotateRightHandler() { //left or right
+	rotateRightHandler() { 
 		this.variantPlus();
 		this.handleSearch();
 	}
@@ -125,17 +124,15 @@ class EPICSearch extends React.Component {
 				
 			})
 			.catch((err) => {
-				console.log(err)
 				this.props.setLength(0)
-				}
-			)
+			})
 	}
 
 	render() {
 		const imgSrc = require('../../assets/img/bg2.jpg');
 		return(
 			<div className="container-fluid p-0 epic epic-search" style={{
-				backgroundImage: `url(${imgSrc})`,
+				backgroundImage: `url(/skydelve/${imgSrc})`,
 				height: "100vh",
 				width: "100vw"
 			}}>
@@ -178,7 +175,7 @@ class EPICSearch extends React.Component {
 				<div className="row no-gutters">
 					<div className="col col-12 justify-content-center">
 						<NavLink to={`${this.props.match.path}/picture`} onClick={this.handleSearch} 
-							className="btn">
+							className="btn search-button">
 							Search
 						</NavLink>
 					</div>

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //actions
-import { MarsSetSolMax } from '../../actions/MarsActions';
+import { MarsSetSolMax, MarsGetPhotoData } from '../../actions/MarsActions';
 //components
 import Calendar from 'rc-calendar';
 import Header from "../Header/Header";
@@ -26,7 +26,8 @@ const mapStateToProps = state => ({
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
-		setSolMax: MarsSetSolMax
+		setSolMax: MarsSetSolMax,
+		getPhotoData: MarsGetPhotoData
 	}, dispatch);
 }
 
@@ -35,7 +36,8 @@ class MarsRovers extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: ''
+			value: '',
+			photoData: []
 		}
 
 	}
@@ -47,13 +49,13 @@ class MarsRovers extends React.Component {
 	getManifest() {
 		let url = `https://api.nasa.gov/mars-photos/api/v1/manifests/${this.props.rover}/?api_key=${this.props.apiKey}`
 		console.log(url);
-
+		let allDates= []
 		axios.get(url)
 			.then(res => {
 				if (res.status === 200) {
 					let data = res.data.photo_manifest
-					console.log(data);
 					this.props.setSolMax(data.max_sol)
+					this.props.getPhotoData(data.photos)					
 				}
 
 			})
@@ -65,7 +67,8 @@ class MarsRovers extends React.Component {
 		const imgSrc = require('../../assets/img/bg2.jpg');
 		return(
 			<div className="container-fluid p-0 mars" style={{
-				backgroundImage: `url(${imgSrc})`,
+				// below: "/skydelve/"" has to be changed to "/" if moved outside github pages
+				backgroundImage: `url(/skydelve/${imgSrc})`, 
 				height: "100vh",
 				width: "100vw"
 			}}>
@@ -97,7 +100,7 @@ class MarsRovers extends React.Component {
 									timeout={600}
 									classNames="deshrink"
 									unmountOnExit>
-									<Rover key={num} num={num} rover={rover} />
+									<Rover key={num} num={num} rover={rover}/>
 								</CSSTransition>
 							)
 						}))}

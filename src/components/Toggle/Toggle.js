@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { withRouter, NavLink } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AnimatedSwitch } from 'react-router-transition';
-import { changeEPICNatural } from '../../actions/changeEPICNatural';
+import { changeEPICNatural } from '../../actions/EPICActions';
 import "./Toggle.sass";
 
 function mapDispatchToProps(dispatch) {

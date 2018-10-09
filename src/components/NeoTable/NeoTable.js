@@ -79,16 +79,23 @@ class NeoTable extends React.Component {
 								<td width="40%">{data.name}</td>
 							</tr>
 							<tr>
-								<td width="60%">Estimated diameter</td>
+								<td width="60%">Estimated max diameter</td>
 
 								<td width="40%">{(data.estimated_diameter.meters.estimated_diameter_max).toFixed(2) + ' m'}</td>
 							</tr>
-								{data.close_approach_data && 
+							{data.close_approach_data &&
+							<React.Fragment> 
 							<tr>
-								<td width="60%">Relative velocity at last close approach</td>
+								<td width="60%">Relative velocity at close approach</td>
 
 								<td width="40%">{Number(data.close_approach_data[0].relative_velocity.kilometers_per_second).toFixed(2)+' km/s'}</td>
 							</tr>
+							<tr>
+								<td width="60%">Miss distance</td>
+
+								<td width="40%">{Number(data.close_approach_data[0].miss_distance.kilometers/1000000).toFixed(2)+' mln km'}</td>
+							</tr>
+							</React.Fragment>
 								}
 							<tr>
 								<td width="60%">Hazardous</td>

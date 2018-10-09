@@ -101,7 +101,8 @@ class PoadPicture extends React.Component {
 		const imgSrc = require('../../assets/img/bg_pattern.png');
 		return (
 			<div className="container-fluid p-0 poad poad-picture" style={{
-				backgroundImage: `url(${bgImage})`,
+				// below: "/skydelve/"" has to be changed to "/" if moved outside github pages
+				backgroundImage: `url(/skydelve/${imgSrc})`, 
 				height: "100vh",
 				width: "100vw"
 			}}>

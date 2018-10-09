@@ -94,7 +94,8 @@ module.exports = {
             },
           },
         ]
-      },
+	  },
+		
       {
         test: /\.(jpe?g|svg|png|gif|ico)$/i,
         use: [{

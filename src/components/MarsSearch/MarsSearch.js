@@ -5,7 +5,7 @@ import axios from 'axios';
 import { NavLink, withRouter} from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //actions
-import { MarsSetCamera, MarsSetSolDate, MarsGetPictures, MarsSetEmptyPictures } from '../../actions/MarsActions';
+import { MarsSetCamera, MarsSetSolDate, MarsGetPictures, MarsSetValidDates } from '../../actions/MarsActions';
 //components
 import Header from "../Header/Header";
 //Icons
@@ -20,14 +20,17 @@ const mapStateToProps = state => ({
 	rover: state.MarsReducer.rover,
 	solMax: state.MarsReducer.solMax,
 	camera: state.MarsReducer.camera,
-	solDate: state.MarsReducer.solDate
+	photoData: state.MarsReducer.photoData,
+	solDate: state.MarsReducer.solDate,
+	validDates: state.MarsReducer.validDates
 });
 
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators({
 		setCamera: MarsSetCamera,
 		setSol: MarsSetSolDate,
-		getPictures: MarsGetPictures
+		getPictures: MarsGetPictures,
+		setValidDates: MarsSetValidDates
 	}, dispatch);
 }
 
@@ -40,7 +43,8 @@ class MarsSearch extends React.Component {
 			cameraChosen: false,
 			cameraName:"",
 			dateTypeChosen: false,
-			solInput: 1
+			solInput: 1,
+			validDates: []
 
 		}
 		this.handleSearch = this.handleSearch.bind(this)
@@ -55,6 +59,11 @@ class MarsSearch extends React.Component {
 	componentDidMount () {
 	//reset sol date on mount
 	  this.props.setSol(1)
+		let allDates = []
+		this.props.photoData.forEach(element => {
+			allDates.push(element.sol);
+		});
+		console.log(allDates);
 	}
 	
 	buildUrl() {
@@ -77,8 +86,16 @@ class MarsSearch extends React.Component {
 		const event = e;
 		const camera = event.target.dataset.cam;
 		const camName = event.target.innerHTML;
+		let validDatesArr = [];
 		this.props.setCamera(camera);
 		this.setState({cameraChosen: true, cameraName: camName})
+		this.props.photoData.forEach(el => {
+			if(el.cameras.includes(camera)) {
+				validDatesArr.push(el.sol)
+			}
+		});
+		this.props.setValidDates(validDatesArr);
+		
 	}
 
 	solInputChange(e) {
@@ -105,18 +122,22 @@ class MarsSearch extends React.Component {
 				this.props.setSol(newSol);
 			}
 		}
+		console.log(this.state.solInput + 1, this.props.validDates.includes(this.state.solInput));
+		
 	}
 	solDecrement(e) {
 		// same as above but decrement
 		const event = e, target = event.target;
 		if(target.dataset.ten==="yes"){
-
-		} else {
 			if (this.state.solInput > 11) {
 				const newSol = this.state.solInput-10;
 				this.setState({ solInput: newSol });
 				this.props.setSol(newSol);
 			}
+		} else {
+			const newSol = this.state.solInput - 1;
+			this.setState({ solInput: newSol });
+			this.props.setSol(newSol);
 		}
 	}
 
@@ -148,9 +169,14 @@ class MarsSearch extends React.Component {
 		caption[0] = caption[0].toUpperCase()
 		caption = caption.join('');
 		let show = this.state.cameraChosen ? "off" : "on";
+		const imgSrc = require('../../assets/img/bg2.jpg');
+		// below returns class "disabled" if no photos from this camera were made on the current sol
+		let inputDisabledClass = this.props.validDates.includes(this.props.solDate) ? "" : "disabled"
+
 		return(
 			<div className="container-fluid p-0 mars mars-search" style={{
-				backgroundImage: `url(${bgImage})`,
+				// below: "/skydelve/"" has to be changed to "/" if moved outside github pages
+				backgroundImage: `url(/skydelve/${imgSrc})`, 
 				height: "100vh",
 				width: "100vw"
 			}}>
@@ -202,18 +228,18 @@ class MarsSearch extends React.Component {
 									timeout={500}
 								>
 								<div className="search-input__wrapper">
-									<button onClick={this.solIncrement} data-ten="yes">+10</button>
-									<button onClick={this.solIncrement}>+</button>
+									<button onClick={this.solDecrement} data-ten="yes">-10</button>
+									<button onClick={this.solDecrement}>-</button>
 									<input 
-										className="search-input" 
+											className={`search-input ${inputDisabledClass}` }
 										type="number" 
 										max={this.props.solMax} 
 										min={0}
 										value={this.state.solInput}
 										onChange={this.solInputChange}
 										onKeyPress={this.onEnter}/>
-									<button onClick={this.solDecrement}>-</button>
-									<button onClick={this.solDecrement} data-ten="yes">-10</button>
+									<button onClick={this.solIncrement}>+</button>
+									<button onClick={this.solIncrement} data-ten="yes">+10</button>
 								</div>
 								</CSSTransition>
 							</div>
@@ -235,11 +261,10 @@ class MarsSearch extends React.Component {
 								<button onClick={this.camClickHandler} data-cam="NAVCAM" className="btn button">Navigation Camera (NAVCAM)</button>
 								{this.props.rover === 'curiosity' && <button onClick={this.camClickHandler} data-cam="MAST" className="btn button">Mast Camera (MAST)</button>}
 								{this.props.rover === 'curiosity' && <button onClick={this.camClickHandler} data-cam="MARDI" className="btn button">Mars Descent Imager (MARDI)</button>}
-								{this.props.rover !== 'curiosity' && <button onClick={this.camClickHandler} data-cam="PANCAM" className="btn button">Panoramic Camera (PANCAM)</button>}
 							</div>
 							<div className="col col-md-5 col-sm-12 align-items-center">
 								<button onClick={this.camClickHandler} data-cam="RHAZ" className="btn button">Rear (RHAZ)</button>
-								{this.props.rover !== 'curiosity' && <button onClick={this.camClickHandler} data-cam="MINI-TES" className="btn button">Thermal Spectrometer (Mini-TES)</button>}
+								{this.props.rover !== 'curiosity' && <button onClick={this.camClickHandler} data-cam="PANCAM" className="btn button">Panoramic Camera (PANCAM)</button>}
 								{this.props.rover === 'curiosity' && <button onClick={this.camClickHandler} data-cam="CHEMCAM" className="btn button">Chemistry Cam (CHEMCAM)</button>}
 								{this.props.rover === 'curiosity' && <button onClick={this.camClickHandler} data-cam="MAHLI" className="btn button">Mars Hand Lens Imager (MAHLI)</button>}
 							</div>
@@ -249,15 +274,23 @@ class MarsSearch extends React.Component {
 					}
 					
 				</div>
-				<div className="row no-gutters spacer-small"></div>
-				<div className="row no-gutters">
-					<div className="col col-12 justify-content-center">
-						<NavLink to={`/mars-photos/picture`} onClick={this.handleSearch} 
-							className="btn search-button">
-							Search
-						</NavLink>
-					</div>
-				</div>
+				{
+					this.state.cameraChosen && <React.Fragment>
+						<div className="row no-gutters spacer-small"></div>
+						<div className="row no-gutters">
+							<div className="col col-12 justify-content-center">
+								{
+									(this.props.validDates.length > 0 && this.props.validDates.includes(this.props.solDate)) ? 
+										<NavLink to={`/mars-photos/picture`} onClick={this.handleSearch} 
+										className="btn search-button">
+										Search
+										</NavLink>
+									: <p>Sorry! No photos were taken from {this.props.camera} camera on this sol.</p>
+								}
+							</div>
+						</div>
+				</React.Fragment>
+				}
 				
 			</div>
 		)

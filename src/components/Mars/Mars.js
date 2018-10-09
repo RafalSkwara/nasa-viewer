@@ -18,7 +18,6 @@ class Mars extends React.Component {
 
 
 	render() {
-		const imgSrc = require('../../assets/img/bg2.jpg');
 		return(
 			<AnimatedSwitch
 				atEnter={{ opacity: 0 }}

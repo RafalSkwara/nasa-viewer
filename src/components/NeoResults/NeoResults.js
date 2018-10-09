@@ -51,7 +51,8 @@ class NeoResults extends React.Component {
 		const imgSrc = require('../../assets/img/bg_pattern.png');
 		return(
 			<div className="container-fluid p-0 neo neo-results" style={{
-				backgroundImage: `url(${bgImage})`,
+				// below: "/skydelve/"" has to be changed to "/" if moved outside github pages
+				backgroundImage: `url(/skydelve/${imgSrc})`, 
 				width: "100vw",
 				mimnHeight: "100vh"
 			}}>

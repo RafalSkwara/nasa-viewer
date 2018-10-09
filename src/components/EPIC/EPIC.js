@@ -17,7 +17,7 @@ import Toggle from "../Toggle/Toggle";
 import { Icon } from 'react-icons-kit'
 import { ic_rotate_right, ic_rotate_left } from 'react-icons-kit/md/'
 //styles
-import "./EPIC.sass";
+// import "./EPIC.sass";
 
 const mapStateToProps = state => ({
 	apiKey: state.keyReducer.apiKey,

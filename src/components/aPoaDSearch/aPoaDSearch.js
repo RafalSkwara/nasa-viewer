@@ -93,7 +93,7 @@ class aPoaDSearch extends React.Component {
 			<Header goBack to={"/start"} />
 			<div className="row no-gutters">
 				<div className="col-12">
-					<h1 className="main-heading">A Picture of the Day</h1>				
+					<h1 className="main-heading">Astronomy Picture of the Day</h1>				
 				</div>
 				<div className="col col-12">
 					<p>Welcome to Astronomy Picture of the Day image viewer. Here you can see thousands of amazing images chosen by NASA that come with detailed explanations.</p>

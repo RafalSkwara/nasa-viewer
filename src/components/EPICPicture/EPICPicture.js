@@ -14,8 +14,7 @@ import { Icon } from 'react-icons-kit'
 import { ic_rotate_right, ic_rotate_left } from 'react-icons-kit/md/'
 //styles
 import "./EPICPicture.sass";
-//images
-import bgImage from '../../assets/img/bg2.jpg'
+
 
 const mapStateToProps = state => ({
 	apiKey: state.keyReducer.apiKey,
@@ -155,8 +154,9 @@ class EPICPicture extends React.Component {
 			width: this.state.width
 		}
 		return(
-			<div className="container-fluid p-0 poad poad-picture" style={{
-				backgroundImage: `url(${bgImage})`,
+			<div className="container-fluid p-0 epic epic-picture" style={{
+				// below: "/skydelve/"" has to be changed to "/" if moved outside github pages
+				backgroundImage: `url(/skydelve/${imgSrc})`, 
 				height: "100vh",
 				width: "100vw"
 			}}>

@@ -42,7 +42,8 @@ class Rover extends React.Component {
 				<div 
 					className="rover" 
 					style={{
-						backgroundImage: `url(${image})`
+						// below: "/skydelve/"" has to be changed to "/" if moved outside github pages
+						backgroundImage: `url(/skydelve/${image})`, 
 					}}
 					onClick={this.dispatchSetRover}
 				>

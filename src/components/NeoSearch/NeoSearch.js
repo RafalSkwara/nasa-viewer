@@ -94,7 +94,8 @@ class NeoSearch extends React.Component {
 
 		return(
 			<div className="container-fluid p-0 neo neo-search" style={{
-				backgroundImage: `url(${bgImage})`,
+				// below: "/skydelve/"" has to be changed to "/" if moved outside github pages
+				backgroundImage: `url(/skydelve/${imgSrc})`, 
 				height: "100vh",
 				width: "100vw"
 			}}>
@@ -114,7 +115,7 @@ class NeoSearch extends React.Component {
 				<div className="row no-gutters spacer-small"></div>
 				<div className="row no-gutters">
 					<div className="col col-12 calendar-column">
-						<p>Pick Start Date</p>
+						<p>Pick a Date</p>
 						<Calendar
 							className="calendar"
 							onChange={(value) => this.handleStart(value)}
@@ -137,7 +138,7 @@ class NeoSearch extends React.Component {
 							Search
 						</a> */}
 						<NavLink to={`${this.props.match.path}/results`} onClick={this.handleSearch} 
-							className="btn">
+							className="btn search-button">
 							Search
 						</NavLink>
 					</div>

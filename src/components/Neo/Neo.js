@@ -7,8 +7,6 @@ import NeoResults from '../NeoResults/NeoResults';
 import NeoSearch from '../NeoSearch/NeoSearch';
 import Calendar from 'rc-calendar';
 
-//styles
-import "./Neo.sass";
 
 
 

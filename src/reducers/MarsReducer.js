@@ -4,7 +4,8 @@ export const MarsReducer = (state = {
 	rover: 'curiosity',
 	camera: 'NAVCAM',
 	pictures: [],
-	empty: true
+	photoData: [],
+	validDates: []
 }, action) => {
 	switch (action.type) {
 		case 'MARS_SET_ROVER':
@@ -32,10 +33,15 @@ export const MarsReducer = (state = {
 				...state,
 			pictures: action.payload,
 			}
-		case 'MARS_SET_EMPTY_PICTURES':
+		case 'MARS_GET_PHOTO_DATA':
 			return {
 				...state,
-			empty: action.payload,
+			photoData: action.payload,
+			}
+		case 'MARS_SET_VALID_DATES':
+			return {
+				...state,
+			validDates: action.payload,
 			}
 		default:
 			return state;

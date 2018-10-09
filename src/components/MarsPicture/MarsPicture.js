@@ -13,8 +13,7 @@ import {
 } from 'react-router-dom'
 import Header from "../Header/Header";
 import "./MarsPicture.sass";
-//images
-import bgImage from '../../assets/img/bg_pattern.png'
+
 const mapStateToProps = state => ({
 	apiKey: state.keyReducer.apiKey,
 	pictures: state.MarsReducer.pictures,
@@ -79,7 +78,7 @@ class MarsPicture extends React.Component {
 		}
 	}
 	picDec() {
-		if (this.state.picIndex > 1 ) {
+		if (this.state.picIndex > 0 ) {
 			this.setState({
 				picIndex: this.state.picIndex - 1
 			})
@@ -102,7 +101,8 @@ class MarsPicture extends React.Component {
 		const imgSrc = require('../../assets/img/bg_pattern.png');
 		return (
 			<div className="container-fluid p-0 mars mars-picture" style={{
-				backgroundImage: `url(${bgImage})`,
+				// below: "/skydelve/"" has to be changed to "/" if moved outside github pages
+				backgroundImage: `url(/skydelve/${imgSrc})`, 
 				height: "100vh",
 				width: "100vw"
 			}}>
@@ -152,19 +152,13 @@ class MarsPicture extends React.Component {
 				<div className="row no-gutters">
 					<div className="col-12 justify-content-center">
 						<div className="image-wrapper justify-content-center">
-							{
-								this.props.pictures.length > 0 ?
-								<React.Fragment>
+
 									{this.state.loading && <div className="spinner-wrapper"><div className="loading-spinner"></div></div>}
 									<img src={this.props.pictures[this.state.picIndex]}
 										style={styles}
 										onLoad={() => this.setState({ opacity: 1, loading: false, height: '100%', width: 'auto' })}
 										onClick={this.toggleBigImage}
 									/>
-									</React.Fragment>	
-									: <p>Sorry, no pictures available for this day and camera.</p>
-							}
-
 						</div>
 					</div>
 				</div>
