@@ -1,5 +1,5 @@
+@import '../../view_styles/variables.sass'
 .mars
-
 	img
 		max-height: calc(100vh - 270px)
 		max-width: 100vw
@@ -28,7 +28,9 @@
 			font-weight: 400
 		flex-direction: column
 	.image-wrapper
-		max-height: 100%
+		margin-top: 20px
+		max-height: calc(100vh - 280px)
+		min-height: 400px
 		max-width: 100%
 		width: 100vw
 		display: flex
@@ -36,6 +38,23 @@
 		justify-content: center
 		img
 			transform-origin: center
+			object-fit: contain
+		p
+			align-self: auto
+	.mars__button
+		width: 80px
+		border: 2px solid #fff
+		&:hover,
+		&:active
+			background-color: $dark-purple
+			border: 2px solid $lightest-purple
+	.flex-center
+		p	
+			padding: 10px 0
+			margin: 0
+			&:nth-child(2)
+				margin-left: 10px
+				font-weight: 500
 .buttons
 	margin: 10px 0
 	width: 60%
@@ -52,24 +71,35 @@
 @media all and(max-width: 1000px)
 	html, body
 		overflow: auto
-	.mars .hero__content
+	.mars
 		height: auto
 		display: block	
-	.mars .hero__content h1
+	.mars h1
 		font-size: 24px
 		margin: 0
 		text-align: center
 		padding: 8px 0
-	.mars .hero__content h2
+	.mars h2
 		margin: 0 15px 5px 15px
 		font-size: 18px
-	.hero.fullscreen-bg.mars
+	.fullscreen-bg.mars
 		max-height: auto
 		overflow: auto
-@media all and (max-width: 720px)
+@media all and (max-width: 640px)
 	.mars
 		img
 			max-height: calc(100vh - 220px)
 	.mars
-		.hero__content
-			padding: 70px 10px 0 10px
+		.flex-center
+			flex-direction: column
+			align-items: center
+			p
+				align-self: center
+				text-align: center
+				padding: 0 0 5px 0
+				&:nth-child(2)
+					margin-left: 0
+		.image-wrapper
+			margin-top: 20px
+			max-height: calc(100vh - 320px)
+			min-height: 270px

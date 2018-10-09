@@ -3,7 +3,8 @@ export const MarsReducer = (state = {
 	solMax: 5111,
 	rover: 'curiosity',
 	camera: 'NAVCAM',
-	pictures: []
+	pictures: [],
+	empty: true
 }, action) => {
 	switch (action.type) {
 		case 'MARS_SET_ROVER':
@@ -30,6 +31,11 @@ export const MarsReducer = (state = {
 			return {
 				...state,
 			pictures: action.payload,
+			}
+		case 'MARS_SET_EMPTY_PICTURES':
+			return {
+				...state,
+			empty: action.payload,
 			}
 		default:
 			return state;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, NavLink } from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AnimatedSwitch } from 'react-router-transition';
+import ReactSwipeEvents from 'react-swipe-events'
 import {
 	BrowserRouter as Router,
 	Route,
@@ -34,34 +35,42 @@ class MarsPicture extends React.Component {
 			width: 0,
 			picIndex: 0
 		};
-		this.picDec = this.picDec.bind(this)
-		this.picInc = this.picInc.bind(this)
+		this.picDec = this.picDec.bind(this);
+		this.picInc = this.picInc.bind(this);
+		this.keypressHandler = this.keypressHandler.bind(this);
 	}
 
 	componentDidMount() {
 		if (this.props.imgUrl) {
 			this.setState({ loading: true})
 		}
-
+		document.addEventListener('keypress', this.keypressHandler)
 	}
+	componentWillUnmount() {
+		document.removeEventListener('keypress', this.keypressHandler)
+	}
+	
 
-	componentDidUpdate() {
-		if (this.state.big) {
-			window.scrollTo({
-				"behavior": "smooth",
-				"left": 0,
-				"top": 0
-			});
-
+	keypressHandler(e) {
+		// change pictures on arrow press
+		const event = e;
+		if (e.keyCode === 37) {
+			this.picDec();
+		} else if (e.keyCode === 39) {
+			this.picInc();
 		}
+			
 	}
 
-	picInc() {
-		console.log(this.state.picIndex, this.props.pictures.length);
-		
+	picInc() {		
 		if (this.state.picIndex < this.props.pictures.length-1) {
 			this.setState({
-				picIndex: this.state.picIndex + 1
+				picIndex: this.state.picIndex + 1,
+				loading: true,
+				opacity: 0,
+				loading: true,
+				height: 0,
+				width: 0,
 			})
 		} else {
 			this.setState({
@@ -92,7 +101,7 @@ class MarsPicture extends React.Component {
 		}
 		const imgSrc = require('../../assets/img/bg_pattern.png');
 		return (
-			<div className="container-fluid p-0 poad poad-picture" style={{
+			<div className="container-fluid p-0 mars mars-picture" style={{
 				backgroundImage: `url(${bgImage})`,
 				height: "100vh",
 				width: "100vw"
@@ -103,56 +112,63 @@ class MarsPicture extends React.Component {
 						<h1 className="main-heading">Mars Rovers Photos</h1>
 					</div>
 				</div>
-				<div className="row no-gutters">
+				<div className="row no-gutters mars__info">
 					<div className="col-4 flex-center">
-						<p>Rover:&nbsp;</p>
+						<p>Rover:</p>
 						<p> {this.props.rover}</p>
 					</div>
 
 					<div className="col-4 flex-center">
-						<p>Camera:&nbsp;</p>
+						<p>Camera:</p>
 						<p> {this.props.camera}</p>
 					</div>
 
 					<div className="col-4 flex-center">
-						<p>Sol:&nbsp;</p>
+						<p>Sol:</p>
 						<p> {this.props.solDate}</p>
 					</div>
 				</div>
 				<div className="row no-gutters">
-					<div className="col-4 flex-center">
+					<div className="col-4 col-md-3 flex-center">
 						
-						<button className="btn button" onClick={this.picDec}>Previous</button>
+						<button className="mars__button" onClick={this.picDec}>Previous</button>
 					</div>
 
-					<div className="col-4 flex-center">
+					<div className="col-4 col-md-6 flex-center">
 						<p>Picture:&nbsp;</p>
-						<p> {this.state.picIndex+1}/{this.props.pictures.length}</p>
+						<p> {this.props.pictures.length>0 ?
+								`${this.state.picIndex+1} of ${this.props.pictures.length}`
+								: '0 of 0'
+							}</p>
 					</div>
 
-					<div className="col-4 flex-center">
-						<button className="btn button" 
+					<div className="col-4 col-md-3 flex-center">
+						<button className="mars__button" 
 							onClick={this.picInc}
 							>Next</button>
 					</div>
 				</div>
-
+				<ReactSwipeEvents onSwipedLeft={this.picInc} onSwipedRight={this.picDec}>
 				<div className="row no-gutters">
 					<div className="col-12 justify-content-center">
 						<div className="image-wrapper justify-content-center">
-							{this.state.loading && <div className="spinner-wrapper"><div className="loading-spinner"></div></div>}
-							{this.props.pictures ?
+							{
+								this.props.pictures.length > 0 ?
+								<React.Fragment>
+									{this.state.loading && <div className="spinner-wrapper"><div className="loading-spinner"></div></div>}
 									<img src={this.props.pictures[this.state.picIndex]}
 										style={styles}
 										onLoad={() => this.setState({ opacity: 1, loading: false, height: '100%', width: 'auto' })}
 										onClick={this.toggleBigImage}
 									/>
-								: null
+									</React.Fragment>	
+									: <p>Sorry, no pictures available for this day and camera.</p>
 							}
 
 						</div>
 					</div>
 				</div>
+				</ReactSwipeEvents>
 			</div>
 		)
 

@@ -74,7 +74,6 @@ class NeoSearch extends React.Component {
 
 	handleSearch() {
 		let url = this.buildUrl();
-		console.log(url)
 		axios.get(url)
 			.then(res => {
 				let neos = res.data.near_earth_objects;
@@ -83,9 +82,6 @@ class NeoSearch extends React.Component {
 				
 				this.props.getDates(dates);
 				this.props.getNeos(resultArray)
-				// dates.forEach(date => {
-				// 	console.log(neos[date])
-				// })
 			})
 			.catch(err => {
 				console.log(error);

@@ -28,3 +28,9 @@ export function MarsGetPictures(arr) {
 		payload: arr
 	};
 }
+export function MarsSetEmptyPictures(bool) {
+	return {
+		type: "MARS_SET_EMPTY_PICTURES",
+		payload: bool
+	};
+}

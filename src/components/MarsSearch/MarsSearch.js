@@ -2,19 +2,17 @@ import * as React from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, NavLink, Switch, Redirect, withRouter} from 'react-router-dom'
+import { NavLink, withRouter} from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 //actions
-import { MarsSetCamera, MarsSetSolDate, MarsGetPictures } from '../../actions/MarsActions';
+import { MarsSetCamera, MarsSetSolDate, MarsGetPictures, MarsSetEmptyPictures } from '../../actions/MarsActions';
 //components
-import Calendar from 'rc-calendar';
 import Header from "../Header/Header";
 //Icons
 import { Icon } from 'react-icons-kit'
-import { ic_rotate_right, ic_rotate_left } from 'react-icons-kit/md/'
+import { ic_close } from 'react-icons-kit/md/'
 //styles
 import bgImage from '../../assets/img/bg2.jpg'
-import '../../view_styles/rc-calendar.sass';
 import "./MarsSearch.sass";
 
 const mapStateToProps = state => ({
@@ -46,13 +44,19 @@ class MarsSearch extends React.Component {
 
 		}
 		this.handleSearch = this.handleSearch.bind(this)
+		this.onEnter = this.onEnter.bind(this)
 		this.camClickHandler = this.camClickHandler.bind(this)
 		this.resetCamHandler = this.resetCamHandler.bind(this)
 		this.solInputChange = this.solInputChange.bind(this)
-		this.solInc = this.solInc.bind(this)
-		this.solDec = this.solDec.bind(this)
+		this.solIncrement = this.solIncrement.bind(this)
+		this.solDecrement = this.solDecrement.bind(this)
 	}
 
+	componentDidMount () {
+	//reset sol date on mount
+	  this.props.setSol(1)
+	}
+	
 	buildUrl() {
 		let url = this.state.request_base;
 		url = `${url}${this.props.rover}/photos/?sol=${this.props.solDate}&camera=${this.props.camera}`;
@@ -78,37 +82,61 @@ class MarsSearch extends React.Component {
 	}
 
 	solInputChange(e) {
+		//change solDate in store on input change
 		let event = e, val = Number(event.target.value);
 		this.setState({solInput: val})
 		this.props.setSol(val)
 	}
 
-	solInc() {
-		if (this.state.solInput < this.props.solMax) {
-			const newSol = Number(this.state.solInput)+1;
-			this.setState({ solInput: newSol });
-			this.props.setSol(newSol);
+	solIncrement(e) {
+		// increment sol date on click, by 1 or by 10
+		const event = e, target = event.target;
+		if(target.dataset.ten==="yes"){
+			//increment by 10 if the button has data-ten set to yes
+			if (this.state.solInput < this.props.solMax-10) {
+				const newSol = Number(this.state.solInput) + 10;
+				this.setState({ solInput: newSol });
+				this.props.setSol(newSol);
+			}
+		} else {
+			if (this.state.solInput < this.props.solMax) {
+				const newSol = Number(this.state.solInput)+1;
+				this.setState({ solInput: newSol });
+				this.props.setSol(newSol);
+			}
 		}
 	}
-	solDec() {
-		if (this.state.solInput > 1) {
-			const newSol = this.state.solInput-1;
-			this.setState({ solInput: newSol });
-			this.props.setSol(newSol);
+	solDecrement(e) {
+		// same as above but decrement
+		const event = e, target = event.target;
+		if(target.dataset.ten==="yes"){
+
+		} else {
+			if (this.state.solInput > 11) {
+				const newSol = this.state.solInput-10;
+				this.setState({ solInput: newSol });
+				this.props.setSol(newSol);
+			}
 		}
 	}
 
+	onEnter(e) {
+		// dispatch search method and reroute when Enter is pressed
+		let event = e;
+		if(event.which === 13){
+			this.handleSearch();
+			this.props.history.push(`/mars-photos/picture`)
+		} 	
+	}
 
 	handleSearch() {
 		let url = this.buildUrl(),
 			picturesArr = [];
-		console.log(url);
-		
 		axios.get(url)
 			.then(res => {
 				if (res.status === 200) {
-					res.data.photos.forEach(el => picturesArr.push(el.img_src));
-					this.props.getPictures(picturesArr)
+						res.data.photos.forEach(el => picturesArr.push(el.img_src));
+						this.props.getPictures(picturesArr)
 				}
 			})
 			.catch((err) => console.log(err)
@@ -150,7 +178,11 @@ class MarsSearch extends React.Component {
 							exit={true}
 							timeout={500}
 						>
-						<button onClick={this.resetCamHandler} data-cam="" className="btn button">{this.state.cameraName}</button>
+						<button onClick={this.resetCamHandler} data-cam="" className="btn button selected-camera">
+	
+							{this.state.cameraName}
+	
+						</button>
 						</CSSTransition>
 					</div>
 
@@ -158,7 +190,7 @@ class MarsSearch extends React.Component {
 					{
 						this.state.cameraChosen ? <React.Fragment>
 							<div className="col col-sm-12 d-f align-items-center">
-								<p>Date in sol. Max sol: {this.props.solMax}</p>
+								<p className="mars-search__sol-max">Date in sol.<br />Max sol: {this.props.solMax}</p>
 							</div>
 							<div className="col col-sm-12 align-items-center">
 								<CSSTransition
@@ -170,15 +202,18 @@ class MarsSearch extends React.Component {
 									timeout={500}
 								>
 								<div className="search-input__wrapper">
-									<button onClick={this.solInc}>+</button>
+									<button onClick={this.solIncrement} data-ten="yes">+10</button>
+									<button onClick={this.solIncrement}>+</button>
 									<input 
 										className="search-input" 
 										type="number" 
 										max={this.props.solMax} 
 										min={0}
 										value={this.state.solInput}
-										onChange={this.solInputChange}/>
-										<button onClick={this.solDec}>-</button>
+										onChange={this.solInputChange}
+										onKeyPress={this.onEnter}/>
+									<button onClick={this.solDecrement}>-</button>
+									<button onClick={this.solDecrement} data-ten="yes">-10</button>
 								</div>
 								</CSSTransition>
 							</div>

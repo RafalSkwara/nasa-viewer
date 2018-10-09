@@ -111,18 +111,23 @@ class EPICSearch extends React.Component {
 
 	handleSearch() {
 		let url = this.buildUrl();
-		
+		let resultArr=[];
 		axios.get(url)
 			.then(res => {
 				if (res.status === 200) {
 					let variant = this.props.variant
+					console.log(res.data);
+					res.data.forEach(el => resultArr.push(el.image))
 					this.props.setImage(
 						 `https://epic.gsfc.nasa.gov/archive/${this.props.natural? "natural" : "enhanced"}/${this.props.year}/${this.props.month}/${this.props.day}/jpg/`+res.data[variant].image+'.jpg')
 					this.props.setLength(res.data.length)
 				}
 				
 			})
-			.catch((err) => console.log(err)
+			.catch((err) => {
+				console.log(err)
+				this.props.setLength(0)
+				}
 			)
 	}
 
@@ -164,7 +169,10 @@ class EPICSearch extends React.Component {
 				</div>
 				<div className="row no-gutters">
 					<div className="col col-12 justify-content-center">
-						<Toggle toggleLabel="Enhanced Mode" size={60}/>
+						<Toggle 
+							toggleLabel="Enhanced Mode" 
+							size={60}
+							active={!this.props.natural}/>
 					</div>
 				</div>
 				<div className="row no-gutters">

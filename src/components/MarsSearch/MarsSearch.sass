@@ -13,7 +13,7 @@
 
 		padding: 20px
 	h2.selected
-		margin: 0 40px 40px 40px
+		margin: 10px 40px 40px 40px
 		font-weight: 300
 		span
 			font-weight: 500
@@ -62,8 +62,19 @@
 		padding: 5px 20px
 		margin: 0
 		align-self: center
-
-
+	.mars-search__sol-max
+		margin: 15px 0 10px 0
+		text-align: center
+	button.selected-camera
+		border: none
+		border-radius: 0
+		background-color: rgba(255,255,255,.2)
+		.button-spacer
+			display: none
+		&:hover
+			background-color: $light-purple
+			.button-spacer
+				display: block
 	.search-button
 		margin-top: 10px
 		&:hover
@@ -72,13 +83,14 @@
 		display: flex
 		align-items: center
 		button
-			width: 60px
-			height: 60px
+			border: 1px solid #fff
+			width: 50px
+			height: 50px
 	input.search-input
-		height: 60px
+		height: 50px
 		width: 120px
 		text-align: center
-		line-height: 60px
+		line-height: 50px
 		font-size: 28px
 		padding: 0
 		appearance: textfield
@@ -100,7 +112,7 @@
 			text-align: center
 			font-size: 18px
 		h2.selected
-			margin-bottom: 10px
+			margin: 10px 0
 	
 		p
 			font-size: 16px

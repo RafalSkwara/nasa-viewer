@@ -65,7 +65,6 @@ class aPoaD extends React.Component {
 		this.setState({
 			value: `${year}-${month}-${day}`
 		})
-		console.log(this.buildUrl())
 	}
 
 	handleSearch() {
@@ -74,12 +73,6 @@ class aPoaD extends React.Component {
 		axios.get(url)
 			.then(res => {
 				this.props.updateImage({
-					imgUrl: res.data.url ? res.data.url : res.data.hdurl,
-					imgHDUrl: res.data.hdurl,
-					mediaType: res.data.media_type,
-					details: res.data.explanation
-				})
-				console.log({
 					imgUrl: res.data.url ? res.data.url : res.data.hdurl,
 					imgHDUrl: res.data.hdurl,
 					mediaType: res.data.media_type,

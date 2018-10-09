@@ -2,8 +2,8 @@ import * as React from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
-import { BrowserRouter as Router, Route, NavLink, Switch, Redirect} from 'react-router-dom'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import ReactSwipeEvents from 'react-swipe-events'
 //actions
 import { EPICVariantPlus, EPICVariantMinus, EPICSetVariant, EPICClearImage, EPICSetImage, EPICSetLength } from '../../actions/EPICActions';
 //components
@@ -52,10 +52,11 @@ class EPICPicture extends React.Component {
 			width: 0,
 
 		}
-		this.handleSearch = this.handleSearch.bind(this)
-		this.rotateLeftHandler = this.rotateLeftHandler.bind(this)
-		this.rotateRightHandler = this.rotateRightHandler.bind(this)
-		this.loadHandler = this.loadHandler.bind(this)
+		this.handleSearch = this.handleSearch.bind(this);
+		this.rotateLeftHandler = this.rotateLeftHandler.bind(this);
+		this.rotateRightHandler = this.rotateRightHandler.bind(this);
+		this.loadHandler = this.loadHandler.bind(this);
+		this.keypressHandler = this.keypressHandler.bind(this);
 	}
 	componentDidMount() {
 		this.props.clearImage();
@@ -63,6 +64,22 @@ class EPICPicture extends React.Component {
 		if (this.props.imgUrl) {
 			this.setState({ loading: true })
 		}
+		document.addEventListener('keypress', this.keypressHandler)
+	}
+	componentWillUnmount() {
+		document.removeEventListener('keypress', this.keypressHandler)
+	}
+
+
+	keypressHandler(e) {
+		// change pictures on arrow press
+		const event = e;
+		if (e.keyCode === 37) {
+			this.rotateLeftHandler();
+		} else if (e.keyCode === 39) {
+			this.rotateRightHandler();
+		}
+
 	}
 
 	buildUrl() {
@@ -84,8 +101,6 @@ class EPICPicture extends React.Component {
 	}
 	variantMinus() {
 		// subtract from variant num until 0 reached, then loop over from end
-		console.log(this.props.imgLength, this.props.variant, this.state.imgLength - 1);
-		
 		if (this.props.imgLength !== undefined && this.props.variant > 0) {
 			this.props.variantMinus();
 		} else {
@@ -163,26 +178,33 @@ class EPICPicture extends React.Component {
 						</div>	
 					</div>
 				</div>
+				<ReactSwipeEvents onSwipedLeft={this.rotateLeftHandler} onSwipedRight={this.rotateRightHandler}>
 				<div className="row no-gutters">
 					<div className="col-12 justify-content-center">
-						<div className="image-wrapper justify-content-center">
-					{this.state.loading && <div className="spinner-wrapper"><div className="loading-spinner"></div></div>}
+							<div className="image-wrapper justify-content-center">
+							{this.props.imgLength > 0 ? 
+								<React.Fragment>
+								{this.state.loading && <div className="spinner-wrapper"><div className="loading-spinner"></div></div>}
 
-							<CSSTransition
-								in={!this.state.loading}
-								classNames="deshrink"
-								key={this.props.imgUrl}
-								timeout={300}
-							>
-							<img src={this.props.imgUrl}
-							style={styles}
-								onLoad={this.loadHandler}
-								onClick={this.toggleBigImage}
-							/>
-							</CSSTransition>
+									<CSSTransition
+										in={!this.state.loading}
+										classNames="deshrink"
+										key={this.props.imgUrl}
+										timeout={300}
+									>
+									<img src={this.props.imgUrl}
+									style={styles}
+										onLoad={this.loadHandler}
+										onClick={this.toggleBigImage}
+									/>
+									</CSSTransition>
+								</React.Fragment>
+						:	<p>Sorry, no pictures available for this date in {this.props.natural?"natural" : "enhanced"} mode.</p>
+						}
+						</div>
 					</div>
 				</div>
-				</div>
+				</ReactSwipeEvents>
 
 				
 
