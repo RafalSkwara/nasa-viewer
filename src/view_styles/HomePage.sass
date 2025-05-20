@@ -1,13 +1,13 @@
-@import './variables.sass'
+@use './variables' as *
 .container-fluid
-	
+
 
 .hero
 	width: 100vw
 	display: flex
 	flex: 1 1
 	flex-direction: column
-	background: 
+	background:
 		repeat: no-repeat
 		size: cover
 		position: center
@@ -38,7 +38,7 @@
 	h1
 		font:
 			size: 7vmax
-			family: 'Notable', sans-serif	
+			family: 'Notable', sans-serif
 		margin-bottom: 5vh
 		text-shadow: 0 0 15px rgba(255,255,255,0.8)
 	h2
@@ -72,7 +72,7 @@ button
 	&:active
 		transform: scale(0.98)
 h1
-		
+
 
 .animated
 	background-color: #fff
@@ -83,4 +83,3 @@ h1
 	100%
 		width: 100%
 		opacity: 1
-

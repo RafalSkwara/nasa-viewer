@@ -1,4 +1,4 @@
-@import '../../view_styles/variables.sass'
+@use '../../view_styles/variables' as *
 .mars
 	img
 		max-height: calc(100vh - 270px)
@@ -12,7 +12,7 @@
 		max-width: 1440px
 		color: #fff
 		div.switch-wrapper > div,
-		div.switch-wrapper 
+		div.switch-wrapper
 			height: 100%
 			width: 100%
 			display: flex
@@ -49,7 +49,7 @@
 			background-color: $dark-purple
 			border: 2px solid $lightest-purple
 	.flex-center
-		p	
+		p
 			padding: 10px 0
 			margin: 0
 			&:nth-child(2)
@@ -68,12 +68,12 @@
 		p
 			padding: 10px 0
 			height: 60px
-@media all and(max-width: 1000px)
+@media all and (max-width: 1000px)
 	html, body
 		overflow: auto
 	.mars
 		height: auto
-		display: block	
+		display: block
 	.mars h1
 		font-size: 24px
 		margin: 0
@@ -83,7 +83,7 @@
 		margin: 0 15px 5px 15px
 		font-size: 18px
 	.fullscreen-bg.mars
-		max-height: auto
+		max-height: initial
 		overflow: auto
 @media all and (max-width: 640px)
 	.mars

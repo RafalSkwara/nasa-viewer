@@ -1,7 +1,7 @@
-@import '../../view_styles/variables.sass'
+@use '../../view_styles/variables' as *
 .mars
 	div.switch-wrapper > div,
-	div.switch-wrapper 
+	div.switch-wrapper
 		height: 100%
 		width: 100%
 		display: flex
@@ -42,7 +42,7 @@
 .mars-search
 	color: #fff
 	div.switch-wrapper > div,
-	div.switch-wrapper 
+	div.switch-wrapper
 		height: 100%
 		width: 100%
 		display: flex
@@ -116,7 +116,7 @@
 			font-size: 18px
 		h2.selected
 			margin: 10px 0
-	
+
 		p
 			font-size: 16px
 		button.btn.button
@@ -124,7 +124,7 @@
 			height: 40px
 		.col-1-md,
 		.col-md-1
-			flex: 0 0	
+			flex: 0 0
 		.row .align-items-center, .row .justify-content-center
 			flex: 1 auto
 @media all and (max-width: 640px)

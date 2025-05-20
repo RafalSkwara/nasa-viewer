@@ -44,7 +44,7 @@ module.exports = {
 		  loader: 'babel-loader',
 		  options: {
 			cacheDirectory: true,
-			  presets: ["@babel/preset-env", "@babel/react"],	
+			  presets: ["@babel/preset-env", "@babel/react"],
 		  },
 		},
 	  },
@@ -74,12 +74,13 @@ module.exports = {
 			  ],
 			},
 		  },
-		  {
-			loader: 'sass-loader',
-			options: {
-			  sourceMap: true,
-			},
-		  },
+    {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              implementation: require('sass'),
+            },
+          },
 		],
 	  },
 	  {

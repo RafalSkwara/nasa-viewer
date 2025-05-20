@@ -8,7 +8,7 @@ Some of the technologies and tools used:
 - React
 - Redux
 - React-Router
-- SASS
+- SASS (using Dart Sass)
 - Webpack 4
 - JavaScript ES6 (of course)
 - Bootsrap 4 grid
@@ -17,7 +17,7 @@ Some of the technologies and tools used:
 
 ### Astronomy picture of the day
 
-A part of the app that allows user to choose the date and see the Astronomy picture of the day chosen by NASA then. 
+A part of the app that allows user to choose the date and see the Astronomy picture of the day chosen by NASA then.
 
 ### EPIC
 
@@ -30,3 +30,24 @@ This section uses NASA's Neo API to provide details about every registered aster
 ### Mars Rovers Photos
 
 Photo viewer displaying all of the photographs taken by NASA's Martian rovers. The photos are filtered by camera and sorted by sol (Martian day) since rover landing. Touch swiping available.
+
+## Development Notes
+
+### Node.js Compatibility
+
+This project is configured to work with Node.js 12 (as specified in `.nvmrc`) and also supports newer Node.js versions (17+). The npm scripts automatically detect the Node.js version and apply the `--openssl-legacy-provider` flag only when running on Node.js 17 or higher, where it's required due to OpenSSL 3.0 changes.
+
+### SASS Implementation
+
+This project uses Dart Sass (the `sass` package) instead of node-sass for SASS compilation. Dart Sass is the primary implementation of SASS and is more actively maintained than node-sass.
+
+#### Future Considerations
+
+There are some deprecation warnings that will need to be addressed in future updates:
+
+1. The legacy JS API used by sass-loader is deprecated and will be removed in Dart Sass 2.0.0.
+2. Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0. These should be migrated to @use and @forward rules.
+
+For more information on these deprecations, see:
+- https://sass-lang.com/d/legacy-js-api
+- https://sass-lang.com/d/import

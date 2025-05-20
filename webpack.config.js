@@ -91,11 +91,12 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
+              implementation: require('sass'),
             },
           },
         ]
 	  },
-		
+
       {
         test: /\.(jpe?g|svg|png|gif|ico)$/i,
         use: [{

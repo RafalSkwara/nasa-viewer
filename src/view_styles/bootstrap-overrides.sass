@@ -1,0 +1,17 @@
+// This file contains overrides for bootstrap SASS files to fix deprecation warnings
+// related to mixed declarations (declarations after nested rules)
+
+// Fix for _custom-forms.scss line 399
+.custom-range
+  &
+    appearance: none
+
+// Note: The transition mixin issue is more complex as it's used in multiple places
+// For a more comprehensive fix, we would need to create a custom version of the transition mixin
+// However, for now, we'll just override the specific elements that use it and are causing warnings
+
+// Common bootstrap components that might use the transition mixin
+.btn, .form-control, .custom-select, .custom-file-input, .custom-range, .dropdown-menu, .modal, .collapse, .carousel
+  &
+    @media screen and (prefers-reduced-motion: reduce)
+      transition: none !important

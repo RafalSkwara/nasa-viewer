@@ -1,4 +1,4 @@
-@import './variables.sass'
+@use './variables' as *
 
 .rc-calendar
   box-sizing: border-box
@@ -997,17 +997,17 @@
     color: #3FC7FA
 
 @media all and (max-width: 720px)
-	.rc-calendar.calendar
-		width: 290px
-	.rc-calendar
-		&-body
-			height: 186px
-			padding: 0 10px
-		&-date
-			width: 22px
-			height: 22px
-			font-size: 14px
-		&-column-header
-			font-size: 16px
-			width: 28px
-			padding: 8px 0
+  .rc-calendar.calendar
+    width: 290px
+  .rc-calendar
+    &-body
+      height: 186px
+      padding: 0 10px
+    &-date
+      width: 22px
+      height: 22px
+      font-size: 14px
+    &-column-header
+      font-size: 16px
+      width: 28px
+      padding: 8px 0
