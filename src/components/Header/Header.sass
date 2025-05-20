@@ -1,4 +1,4 @@
-@import '../../view_styles/variables.sass'
+@use '../../view_styles/variables' as *
 .header
 	display: flex
 	align-items: center
@@ -36,7 +36,7 @@
 	width: 100px
 	&:hover
 		color: $lightest-purple
-	
+
 @media all and (max-width: 780px)
 	.header
 		padding: 0 0 0 20px

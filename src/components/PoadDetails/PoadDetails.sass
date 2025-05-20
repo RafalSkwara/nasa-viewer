@@ -1,4 +1,4 @@
-@import '../../view_styles/variables.sass'
+@use '../../view_styles/variables' as *
 $header-height: 100px
 .poad-details
 	color: #fff
@@ -23,15 +23,14 @@ $header-height: 100px
 			width: 100%
 			text-align: center
 	h3.heading
-		padding: 10px 0
 		margin: 0 0 20px 0
 		width: 100%
 		padding: 10px 10%
 		font:
 			size: 26px
 		background-color: $light-purple
-		
-@media all and(max-width: 1000px)
+
+@media all and (max-width: 1000px)
 	$header-height: 80px
 	.poad-details
 		p
